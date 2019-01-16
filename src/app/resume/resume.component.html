@@ -1,0 +1,32 @@
+<div id="main-panel">
+
+  <mat-card class="eiv-panel">
+
+    <div id="title-resume">
+      <h1>Result {{faceResult}}</h1>
+    </div>
+
+    <div id="resume-pgr">
+      <circle-progress
+        [outerStrokeColor]="color"
+        [percent]="percentage">
+      </circle-progress>
+      <span id="label-percentage">{{percentage}}%</span>
+    </div>
+
+    <div id="resume-score">
+      <div id="score-success"><span>Success: {{score.success}}</span></div>
+      <div id="score-errors"><span>Errors: {{score.errors}}</span></div>
+    </div>
+
+    <div id="resume-btn-actions-container">
+      <button mat-button mat-raised-button color="primary" (click)="goToHome()">
+        Close
+      </button>
+    </div>
+
+  </mat-card>
+
+</div>
+
+

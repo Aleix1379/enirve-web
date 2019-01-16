@@ -1,0 +1,119 @@
+@import "../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../../../node_modules/material-design-color-palette/less/variables/colors.less";
+
+app-login {
+  height: 100vh;
+  display: block;
+  background: white;
+}
+
+#login::after {
+  background: url("../../assets/images/undraw_group_chat_v059.svg") no-repeat center;
+  background-size: contain;
+  //@backgroundBlur: 2px;
+  //-webkit-filter: blur(@backgroundBlur);
+  //-moz-filter: blur(@backgroundBlur);
+  //-o-filter: blur(@backgroundBlur);
+  //-ms-filter: blur(@backgroundBlur);
+  //filter: blur(@backgroundBlur);
+}
+
+#login {
+  width: 340px;
+  position: fixed;
+  top: calc(~'50% - 64px');
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .loading-container {
+    background: rgba(69, 69, 69, 0.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100000000000;
+
+    > div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 340px;
+    position: relative;
+  }
+
+  .mat-form-field-label,
+  input {
+    //color: white;
+  }
+
+  #btn-register,
+  #btn-login {
+    margin-top: 20px;
+    background-color: @mdc-amber-400;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    //margin-bottom: 20px;
+  }
+
+  #btn-register,
+  #btn-login,
+  mat-form-field {
+    width: 260px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  mat-form-field {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .mat-form-field-underline {
+    //background-color: rgb(255, 255, 255);
+  }
+
+  #btn-login {
+    //margin-left: 70px;
+  }
+
+  .mat-tab-labels {
+
+    .mat-tab-label {
+      opacity: .8;
+      width: 50%;
+      //color: white;
+    }
+
+    .mat-tab-label-active {
+      font-weight: bold;
+      color: #4a4a4a;
+    }
+
+  }
+
+  .mat-ink-bar {
+    background-color: #4a4a4a !important;
+  }
+
+}
+
+#login::after {
+  content: "";
+  //background: url('../../assets/images/bg-abstract.jpg');
+  opacity: 0.85;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}

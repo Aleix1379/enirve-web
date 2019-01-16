@@ -1,0 +1,140 @@
+@import "../../../node_modules/material-design-color-palette/less/variables/colors.less";
+
+#form-practice {
+  color: #424242;
+  float: left;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @margin-input: 15px;
+
+  #practice-verb {
+    margin-left: @margin-input;
+    margin-right: @margin-input;
+  }
+
+  .practice-form-row {
+    float: left;
+    clear: left;
+    margin-bottom: 20px;
+
+    > div {
+      position: relative;
+      float: left;
+
+      mat-form-field {
+        float: left;
+        margin-left: @margin-input;
+        margin-right: @margin-input;
+      }
+
+    }
+  }
+
+  .control-exercice {
+    margin: 0 15px 20px;
+    position: relative;
+
+    mat-progress-bar {
+      height: 35px;
+      border-radius: 20px;
+    }
+
+    span:first-child {
+      left: 25px;
+    }
+
+    span:first-child + span {
+      right: 25px;
+    }
+
+    span:first-child,
+    span:first-child + span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      color: white;
+      margin-bottom: 5px;
+    }
+
+  }
+
+  #practice-btn-actions-container {
+    button {
+      margin-left: @margin-input;
+      margin-right: @margin-input;
+    }
+  }
+
+  #score {
+    overflow: auto;
+    width: calc(~'100% - 30px');
+    margin-left: 15px;
+    margin-right: 15px;
+
+    #score-success,
+    #score-errors {
+      float: left;
+      width: 50%;
+    }
+
+    #score-success {
+      span {
+        color: @mdc-green-500;
+      }
+    }
+
+    #score-errors {
+      span {
+        float: right;
+        color: @mdc-red-500;
+      }
+    }
+  }
+
+  #mode-exercices-btn-actions
+  .btn-nav-next {
+    float: right !important;
+  }
+
+  #practice-timer {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+
+    #practice-timer-label:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      height: 10px;
+      width: 100px;
+    }
+
+    #practice-timer-label {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      width: 100px;
+      text-align: center;
+    }
+    #practice-timer-label:first-letter {
+      text-transform: uppercase;
+    }
+    #practice-timer-value {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+  }
+
+}

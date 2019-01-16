@@ -1,0 +1,50 @@
+#mode-exercices-btn-actions {
+  width: 100%;
+  float: left;
+  padding-right: 15px;
+
+  .bnt-nav-prev,
+  .bnt-nav-next {
+    width: 50%;
+    float: left;
+  }
+
+  .bnt-nav-next {
+    button {
+      float: right;
+    }
+  }
+
+}
+
+#exercices-selected-to-practice {
+  width: 100%;
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 15px;
+
+  > span:first-child {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  div {
+    float: left;
+    margin-right: 10px;
+    position: relative;
+  }
+
+  div:before {
+    content: ',';
+    position: absolute;
+    bottom: 0;
+    right: -6px;
+  }
+
+  div:last-child:before {
+    display: none;
+  }
+}

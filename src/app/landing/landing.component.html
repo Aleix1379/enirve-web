@@ -1,0 +1,115 @@
+<div>
+
+  <div id="landing-goals" class="landing-block">
+
+    <div id="landing-goals-description">
+
+      <div>
+        <p id="landing-goals-description-title">With Enirve you can <br/>practise irregular verbs</p>
+
+        <p id="landing-goals-description-subtitle">You can practice by selecting one by one, with a number of verbs or
+          with a time limit</p>
+
+        <div id="landing-goals-description-btn-get-started">
+          <a [routerLink]="'/'">get started</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="landing-goals-image">
+      <div></div>
+    </div>
+
+  </div>
+
+  <div id="landing-devices" class="landing-block">
+
+    <div *ngFor="let device of devices" class="landing-device-layout">
+
+      <div class="landing-device-container">
+
+        <div id="device-background-container">
+          <img [src]="device.backgroundImage" alt="image device">
+        </div>
+
+        <div class="landing-title">{{device.title}}</div>
+        <div class="landing-description">{{device.description}}</div>
+
+        <div class="landing-devies-sources">
+          <div *ngFor="let source of device.sources">
+            <div>
+              <a *ngIf="!source.url.startsWith('https')" [routerLink]="source.url">{{source.text}}</a>
+              <a *ngIf="source.url.startsWith('https')" [href]="source.url" target="_blank">{{source.text}}</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="landing-friends" class="landing-block">
+
+    <div id="landing-friends-text">
+      <div>
+        <div class="landing-title">
+          Better with friends
+        </div>
+        <div class="landing-description">
+          You can compete with your friends and prove who is the best
+        </div>
+      </div>
+    </div>
+
+    <div id="landing-friends-image">
+      <img src="../../assets/images/undraw_winners_ao2o.svg" alt="image trophy"/>
+    </div>
+
+  </div>
+
+  <div id="landing-social-networks" class="landing-block">
+
+    <div id="background-social-networks">
+      <img src="../../assets/images/landing-background-social-networks.svg" alt="background">
+    </div>
+
+    <div id="landing-social-networks-image">
+      <img src="../../assets/images/undraw_messaging_uok8.svg" alt="image trophy"/>
+    </div>
+
+    <div id="landing-social-networks-text">
+      <div>
+        <div id="landing-social-networks-title" class="landing-title">
+          Follow me on social networks
+        </div>
+        <div id="landing-social-networks-description" class="landing-description">
+          If you want to send me feedback or still up to date about the last updates you can follow me on social
+          networks
+        </div>
+      </div>
+
+      <div id="landing-social-networks-links">
+
+        <div *ngFor="let socialNetwork of socialNetworks">
+          <a [routerLink]="socialNetwork.link.url" target="_blank">
+            <div class="landing-social-network-image">
+              <img [src]="socialNetwork.image" alt="image social network"/>
+            </div>
+            <div class="landing-social-network-link">
+              {{socialNetwork.socialNetworkName}}: {{socialNetwork.link.text}}
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

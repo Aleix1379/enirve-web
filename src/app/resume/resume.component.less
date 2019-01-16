@@ -1,0 +1,68 @@
+@import "../../../node_modules/material-design-color-palette/less/variables/colors.less";
+
+#resume-pgr {
+  position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 140px;
+  height: 140px;
+  margin: 15px auto 0;
+
+  #label-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: #424242;
+    font-weight: 500;
+  }
+
+  text {
+    tspan[font-size='10'] {
+      display: none;
+    }
+  }
+
+}
+
+#resume-score {
+  overflow: auto;
+  margin: 0 auto;
+  display: block;
+  width: 200px;
+
+  #score-success,
+  #score-errors {
+    float: left;
+    width: 50%;
+  }
+
+  #score-success {
+    span {
+      color: @mdc-green-500;
+    }
+  }
+
+  #score-errors {
+    span {
+      float: right;
+      color: @mdc-red-500;
+    }
+  }
+}
+
+#title-resume {
+  padding: 0;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+#resume-btn-actions-container {
+  button {
+    margin: 0 auto;
+    display: block;
+  }
+}
