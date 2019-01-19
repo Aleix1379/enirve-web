@@ -46,12 +46,12 @@ export class LandingComponent implements OnInit {
         image: '../../assets/images/icons8-twitter.svg',
         socialNetworkName: 'Twitter',
         link: {text: 'aleixmp1379', url: 'https://twitter.com/aleixmp1379'}
-      },
+      }/*,
       {
         image: '../../assets/images/aleix.jpg',
         socialNetworkName: 'Personal web page',
         link: {text: 'http://aleixmp.com', url: 'http://aleixmp.com'}
-      }
+      }*/
     ];
   }
 
