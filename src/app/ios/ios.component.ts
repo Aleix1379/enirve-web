@@ -6,11 +6,11 @@ enum MobileOs {
 }
 
 @Component({
-  templateUrl: './mobile.component.html',
-  styleUrls: ['../app.component.css', './mobile.component.css'],
+  templateUrl: './ios.component.html',
+  styleUrls: ['../app.component.css', './ios.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MobileComponent implements OnInit {
+export class IosComponent implements OnInit {
 
   images: string [];
   imageSelected: string;
@@ -34,11 +34,10 @@ export class MobileComponent implements OnInit {
   }
 
   ngOnInit() {
-    let images = MobileComponent.getImages(MobileOs.ANDROID);
-    this.images = images.concat(MobileComponent.getImages(MobileOs.IOS));
+    // let images = IosComponent.getImages(MobileOs.ANDROID);
+    this.images = IosComponent.getImages(MobileOs.IOS);
 
     console.log({'this.images': this.images});
-
   }
 
   selectImage(image: string): void {

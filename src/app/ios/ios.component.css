@@ -9,9 +9,8 @@
   margin: 30px;
 }
 #card-mobile .mobile-os .badge {
-  float: left;
-  width: 50%;
-  margin-top: 35px;
+  width: 100%;
+  margin-top: 50px;
   text-align: center;
 }
 #card-mobile .mobile-os .badge a img {
@@ -43,4 +42,4 @@
 #card-mobile .mobile-os slideshow .slides .arrow {
   color: lime!important;
 }
-/*# sourceMappingURL=mobile.component.css.map */
+/*# sourceMappingURL=ios.component.css.map */

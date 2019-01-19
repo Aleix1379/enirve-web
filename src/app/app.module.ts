@@ -28,7 +28,7 @@ import {ResumeComponent} from './resume/resume.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import {SecondsToTimePipe} from './seconds-to-time.pipe';
 import {FooterComponent} from './footer/footer.component';
-import {MobileComponent} from './mobile/mobile.component';
+import {IosComponent} from './ios/ios.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,7 +51,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ResumeComponent,
     SecondsToTimePipe,
     FooterComponent,
-    MobileComponent,
+    IosComponent,
     LoginComponent,
     LandingComponent
   ],

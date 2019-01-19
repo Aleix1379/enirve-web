@@ -4,9 +4,9 @@ import {ExerciceComponent} from './exercice/exercice-component';
 import {HomeComponent} from './home/home.component';
 import {PracticeComponent} from './practice/practice.component';
 import {ResumeComponent} from './resume/resume.component';
-import {MobileComponent} from './mobile/mobile.component';
 import {LoginComponent} from './login/login.component';
 import {LandingComponent} from './landing/landing.component';
+import {IosComponent} from './ios/ios.component';
 
 const routes: Routes = [
   {
@@ -22,8 +22,8 @@ const routes: Routes = [
     component: ResumeComponent
   },
   {
-    path: 'mobile',
-    component: MobileComponent
+    path: 'ios',
+    component: IosComponent
   },
   {
     path: 'login',
