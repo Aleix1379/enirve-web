@@ -95,7 +95,7 @@
       <div id="landing-social-networks-links">
 
         <div *ngFor="let socialNetwork of socialNetworks">
-          <a [routerLink]="socialNetwork.link.url" target="_blank">
+          <a [href]="socialNetwork.link.url" target="_blank">
             <div class="landing-social-network-image">
               <img [src]="socialNetwork.image" alt="image social network"/>
             </div>
