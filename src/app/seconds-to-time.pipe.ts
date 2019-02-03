@@ -13,10 +13,10 @@ export class SecondsToTimePipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {
-    let time = Number(value);
-    let hours = (Math.floor(time / 3600));
-    let minutes = (Math.floor((time - hours * 3600) / 60));
-    let seconds = (time - hours * 3600 - minutes * 60);
+    const time = Number(value);
+    const hours = (Math.floor(time / 3600));
+    const minutes = (Math.floor((time - hours * 3600) / 60));
+    const seconds = (time - hours * 3600 - minutes * 60);
 
     let strHours = hours.toString();
     let strMinutes = minutes.toString();
