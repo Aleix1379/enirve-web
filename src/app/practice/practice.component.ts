@@ -1,9 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {Verb} from '../interfaces/verb-interface';
-import {ModeSelect, ValueModeSort, ValueModeType} from '../interfaces/mode-select';
+import {Verb} from '../interfaces/Verb-interface';
+import {ModeSelect, ValueModeSort, ValueModeType} from '../interfaces/Mode-select';
 import {VerbService} from '../verb.service';
-import {Score} from '../interfaces/score';
+import {Score} from '../interfaces/Score';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/observable/interval';
 import {Observable} from 'rxjs/Observable';

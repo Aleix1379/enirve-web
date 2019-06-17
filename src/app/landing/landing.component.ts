@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {Device} from '../interfaces/devices';
+import {Device} from '../interfaces/Devices';
 import {SocialNetwork} from '../interfaces/SocialNetwork';
 
 @Component({

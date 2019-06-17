@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Verb} from './interfaces/verb-interface';
+import {Verb} from './interfaces/Verb-interface';
 
 @Injectable()
 export class VerbService {

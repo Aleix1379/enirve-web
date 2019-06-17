@@ -1,9 +1,9 @@
 import {Component, HostListener, ViewEncapsulation} from '@angular/core';
-import {Verb} from '../interfaces/verb-interface';
 import {MatSnackBar} from '@angular/material';
-import {ModeSelect, ValueModeSelect} from '../interfaces/mode-select';
+import {ModeSelect, ValueModeSelect} from '../interfaces/Mode-select';
 import {Router} from '@angular/router';
 import {VerbService} from '../verb.service';
+import {Verb} from '../interfaces/Verb-interface';
 
 @Component({
   templateUrl: './home.component.html',

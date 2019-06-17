@@ -1,8 +1,8 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Verb} from '../interfaces/verb-interface';
+import {Verb} from '../interfaces/Verb-interface';
 import {VerbService} from '../verb.service';
-import {ModeSelect, ValueModeSort, ValueModeType} from '../interfaces/mode-select';
+import {ModeSelect, ValueModeSort, ValueModeType} from '../interfaces/Mode-select';
 import 'angular2-navigate-with-data';
 
 @Component({

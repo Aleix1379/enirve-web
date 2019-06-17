@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {Score} from '../interfaces/score';
+import {Score} from '../interfaces/Score';
 
 @Component({
   selector: 'app-resume',
