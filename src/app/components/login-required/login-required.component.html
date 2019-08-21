@@ -1,0 +1,19 @@
+<div class="login-required">
+
+  <div class="login-required__container centered-axis-xy shadow-xl">
+
+    <span class="login-required__message">
+      {{message}}
+    </span>
+
+    <button mat-raised-button color="primary" class="btn-full login-required__btn-go-to-login"
+            (click)="goToLogin()">GO TO LOGIN
+    </button>
+
+    <button mat-raised-button color="primary" class="btn-full"
+            (click)="continueWithoutUser()">CONTINUE WITHOUT USER
+    </button>
+
+  </div>
+
+</div>

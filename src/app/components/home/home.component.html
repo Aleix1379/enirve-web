@@ -1,0 +1,24 @@
+<app-login-required [message]="'You have not logged in, your progress will not be saved'"
+                    (close)="closeLoginRequired()" *ngIf="showLoginRequired">
+</app-login-required>
+
+<div class="sections-list">
+
+  <div *ngFor="let section of sections" class="sections-list__item">
+    <app-section-header
+      [title]="section.title"
+      [current]="section.current"
+      [max]="section.max">
+    </app-section-header>
+
+    <div class="verbs-list">
+      <div *ngFor="let verb of section.verbs" class="verbs-list__item">
+        {{verb.present}}
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" class="btn-full home-btn" (click)="startExercises(section)">START</button>
+
+  </div>
+
+</div>

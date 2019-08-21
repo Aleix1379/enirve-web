@@ -1,0 +1,10 @@
+<div class="horizontal-progress-bar">
+  <div class="horizontal-progress-bar__title">Completed {{current}} of {{total}}</div>
+
+  <div class="horizontal-progress-bar__progress">
+    <div class="horizontal-progress-bar__value"
+         [style.width.%]="getProgressPercentage()">
+    </div>
+  </div>
+
+</div>

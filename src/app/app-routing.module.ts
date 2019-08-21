@@ -1,46 +1,43 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ExerciceComponent} from './exercice/exercice-component';
-import {HomeComponent} from './home/home.component';
-import {PracticeComponent} from './practice/practice.component';
-import {ResumeComponent} from './resume/resume.component';
-import {LoginComponent} from './login/login.component';
-import {LandingComponent} from './landing/landing.component';
-import {IosComponent} from './ios/ios.component';
+import {HomeComponent} from './components/home/home.component';
+import {PracticeComponent} from './components/practice/practice.component';
+import {ExercisesComponent} from './components/exercises/exercises.component';
+import {ResumeComponent} from './components/resume/resume.component';
+import {LoginComponent} from './components/login/login.component';
+import {ForgotYourPasswordComponent} from './components/forgot-your-password/forgot-your-password.component';
 
 const routes: Routes = [
   {
-    path: 'exercices',
-    component: ExerciceComponent
+    path: '',
+    component: HomeComponent
   },
   {
     path: 'practice',
     component: PracticeComponent
   },
   {
-    path: 'resume',
-    component: ResumeComponent
+    path: 'exercises/:sectionId',
+    component: ExercisesComponent
   },
   {
-    path: 'ios',
-    component: IosComponent
+    path: 'resume',
+    component: ResumeComponent
   },
   {
     path: 'login',
     component: LoginComponent
   },
   {
-    path: 'about',
-    component: LandingComponent
-  },
-  {
-    path: '',
-    component: HomeComponent
+    path: 'forgot-your-password',
+    component: ForgotYourPasswordComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

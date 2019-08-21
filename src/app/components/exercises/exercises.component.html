@@ -1,0 +1,52 @@
+<div class="exercises-container">
+
+  <i class="fas fa-times exercises-container__close" (click)="cancelExerciceDialog()"></i>
+
+  <app-horizontal-progress-bar [current]="progress.success + progress.errors"
+                               [total]="section.verbs.length"></app-horizontal-progress-bar>
+
+  <app-progress-counter [progress]="progress"></app-progress-counter>
+
+  <div class="exercice-verb-present">
+    Verb: {{currentVerb.present}}
+  </div>
+
+  <div class="exercice-form-container">
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Enter the translation in Spanish" [formControl]="translation"
+               [readonly]="formChecked" [disabled]="formChecked">
+      </label>
+      <mat-error *ngIf="translation.invalid">{{currentVerb.translations['spanish']}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Enter the past simple" [formControl]="pastSimple"
+               [readonly]="formChecked" [disabled]="formChecked">
+      </label>
+      <mat-error *ngIf="pastSimple.invalid">{{currentVerb.simple}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Enter the past participle" [formControl]="pastParticiple"
+               [readonly]="formChecked" [disabled]="formChecked">
+      </label>
+      <mat-error *ngIf="pastParticiple.invalid">{{currentVerb.participle}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="check()" *ngIf="!formChecked">CHECK</button>
+    <button mat-raised-button color="primary" (click)="next()"
+            *ngIf="formChecked && currentUserIndex < section.verbs.length - 1">
+      NEXT
+    </button>
+    <button mat-raised-button color="primary" (click)="finish()"
+            *ngIf="formChecked && currentUserIndex == section.verbs.length - 1">
+      FINISH
+    </button>
+  </div>
+
+  <!--<pre>{{section | json}}</pre>-->
+
+</div>

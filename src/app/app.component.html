@@ -1,3 +1,13 @@
-<app-header></app-header>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<nav class="bottom-nav" *ngIf="showTabs">
+  <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 1}"
+     (click)="setTab(1)" [routerLink]="'/'">
+    <i class="fas fa-crown"></i>
+  </a>
+
+  <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 2}"
+     (click)="setTab(2)" [routerLink]="'/practice'">
+    <i class="fas fa-diagnoses"></i>
+  </a>
+
+</nav>

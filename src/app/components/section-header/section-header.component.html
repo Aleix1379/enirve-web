@@ -1,0 +1,31 @@
+<div class="header-section">
+
+  <i class="fas fa-crown header-section__crown"
+     [ngClass]="getProgress()">
+  </i>
+
+  <h1 class="header-section__value">{{current}} / {{max}}</h1>
+
+  <round-progress
+    [current]="getProgressPercentage()"
+    [max]="100"
+    [color]="'#FFDE0F'"
+    [background]="'#eee'"
+    [radius]="50"
+    [stroke]="5"
+    [semicircle]="false"
+    [rounded]="true"
+    [clockwise]="true"
+    [responsive]="false"
+    [duration]="1000"
+    [animation]="'easeInOutQuart'"
+    [animationDelay]="500">
+  </round-progress>
+
+  <div class="header-section__line header-section__line--left">
+    <div class="header-section__title">{{title}}</div>
+  </div>
+  <div class="header-section__line header-section__line--right"></div>
+
+</div>
+

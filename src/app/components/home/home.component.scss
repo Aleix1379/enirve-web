@@ -1,0 +1,23 @@
+.sections-list {
+  padding: 16px;
+  height: calc(100vh - 25px);
+  overflow-y: scroll;
+
+  &__item {
+    margin-bottom: 2rem;
+  }
+}
+
+.verbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  &__item {
+    flex-wrap: wrap;
+    margin: 4px 10px;
+  }
+}
+
+

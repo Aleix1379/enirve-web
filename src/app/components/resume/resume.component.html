@@ -1,0 +1,34 @@
+<div class="resume">
+
+  <app-section-header
+    *ngIf="progress"
+    [title]="'Resume'"
+    [current]="getCurrent()"
+    [max]="getMax()">
+  </app-section-header>
+
+  <app-progress-counter [progress]="progress"></app-progress-counter>
+
+  <div class="resume-label resume-section">You've mistaken with:</div>
+
+  <div class="mistake-container">
+    <div *ngFor="let mistake of mistakes" class="mistake-item">{{mistake}}</div>
+  </div>
+
+  <div class="resume-points-earned resume-section">
+    <div class="resume-label resume-points-earned__message">Well done, you've earned</div>
+    <div class="resume-label resume-points-earned__points">{{points}} points</div>
+  </div>
+
+  <!--  <img src="assets/images/undraw_winners.png" alt="winners">-->
+
+  <button mat-raised-button color="primary" class="btn-full resume-btn" (click)="repeatWrongVerbs()">
+    REPEAT THE WRONG VERBS
+  </button>
+
+  <button mat-raised-button color="primary" class="btn-full resume-btn" (click)="finish()">
+    FINISH
+  </button>
+
+
+</div>

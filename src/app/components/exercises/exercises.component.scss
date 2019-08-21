@@ -1,0 +1,26 @@
+@import "../../../variables";
+
+.exercises-container {
+  padding: 16px;
+
+  &__close {
+    font-size: 30px;
+  }
+
+  .exercice-verb-present {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 32px;
+  }
+
+  .exercice-form-container {
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      width: 100%;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+}

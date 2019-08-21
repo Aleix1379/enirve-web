@@ -1,0 +1,127 @@
+<div id="login">
+
+  <app-loading *ngIf="showLoading"></app-loading>
+
+  <mat-card>
+
+    <div class="login-title">Welcome to Enirve</div>
+
+    <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="changeTab($event)">
+      <mat-tab label="Login">
+
+        <div>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Enter the email" type="email" [formControl]="loginForm.email">
+              <mat-error
+                *ngIf="loginForm.email.touched && loginForm.email.hasError('email') && !loginForm.email.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="loginForm.email.touched && loginForm.email.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Enter the password" type="password" [formControl]="loginForm.password">
+              <mat-error *ngIf="loginForm.password.touched && loginForm.password.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="btn-full" (click)="login()">
+            LOGIN
+          </button>
+
+          <a [routerLink]="'/forgot-your-password'" class="login-forgot-password">Forgot your password?</a>
+
+        </div>
+
+      </mat-tab>
+
+      <mat-tab label="Sign Up">
+
+        <div>
+
+          <img [src]="registerForm.picture | safe: 'url'" alt="user" class="register-user-image">
+          <button mat-button color="primary" class="btn-register-user-image">
+            Choose a picture
+            <input type="file"
+                   id="file"
+                   (change)="choosePicture($event.target.files)">
+          </button>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Enter the username"
+                     [formControl]="registerForm.username" (input)="checkAvailability('username')">
+              <mat-error *ngIf="registerForm.username.touched && registerForm.username.hasError('required')">
+                Username is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="repeatData.username">
+                This username already exists
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Enter the email" type="email"
+                     [formControl]="registerForm.email" (input)="checkAvailability('email')">
+              <mat-error
+                *ngIf="registerForm.email.touched && registerForm.email.hasError('email') && !registerForm.email.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="registerForm.email.touched && registerForm.email.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="repeatData.email">
+                This email already exists
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Enter the password" type="password" [formControl]="registerForm.password"
+                     (input)="inputPassword('password')">
+              <mat-error *ngIf="registerForm.password.touched && registerForm.password.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <mat-form-field>
+            <label>
+              <input matInput placeholder="Repeat the password" type="password"
+                     (input)="inputPassword('passwordRepeat')"
+                     [formControl]="registerForm.passwordRepeat">
+              <mat-error
+                *ngIf="registerForm.passwordRepeat.touched && registerForm.passwordRepeat.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="registerForm.password.value != registerForm.passwordRepeat.value &&
+                          registerForm.password.touched && registerForm.passwordRepeat.touched &&
+                          !registerForm.passwordRepeat.hasError('required')">
+                The passwords do not match
+              </mat-error>
+            </label>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="btn-full" (click)="register()">
+            REGISTER
+          </button>
+
+        </div>
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </mat-card>
+
+</div>

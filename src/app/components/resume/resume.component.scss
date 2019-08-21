@@ -1,0 +1,49 @@
+@import "../../../variables";
+
+.resume {
+  padding: 16px;
+}
+
+.resume-section {
+  margin-top: 3rem;
+}
+
+.resume-label {
+  color: $color-grey-dark-2;
+  font-size: 2.2rem;
+  font-weight: bold;
+  //margin-top: 3rem;
+  //margin-bottom: 8px;
+}
+
+.resume-points-earned {
+  > div {
+    text-align: center;
+  }
+
+  &__message {
+
+  }
+
+  &__points {
+    font-size: 4rem;
+  }
+}
+
+.mistake-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .mistake-item {
+    color: $color-grey-dark-1;
+    margin-right: 20px;
+    font-size: 1.8rem;
+  }
+}
+
+.resume-btn {
+  margin: 32px auto 0;
+  display: block;
+  width: 100%;
+}
+

@@ -1,0 +1,22 @@
+@import "../../../variables";
+
+.exercice-progress-counter {
+  display: flex;
+  margin-top: 32px;
+  font-size: 2rem;
+
+  &__value {
+    margin-left: 8px;
+  }
+
+  &__success {
+    color: $color-green;
+    flex: 1;
+  }
+
+  &__errors {
+    color: $color-red;
+    flex: 1;
+    text-align: right;
+  }
+}
