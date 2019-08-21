@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class SharedService {
 
-  private readonly serverUrl = 'http://192.168.1.35:3000';
+  private readonly serverUrl = 'http://localhost:3000';
 
   private data = {};
 
