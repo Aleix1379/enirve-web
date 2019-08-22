@@ -5,7 +5,7 @@ import {Section} from '../../interfaces/Section';
 import {SectionService} from '../../services/section/section.service';
 import {UserService} from '../../services/user/user.service';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
-import {TokenResponse} from '../../interfaces/TokenResponse';
+import {Token} from '../../interfaces/Token';
 import {Progress, User} from '../../interfaces/User';
 
 @Component({
@@ -18,57 +18,7 @@ export class HomeComponent implements OnInit {
   user: User;
   showLoginRequired = false;
 
-  constructor(private router: Router,
-              private verbService: VerbService,
-              private userService: UserService,
-              private sectionService: SectionService,
-              private localStorageService: LocalStorageService) {
-  }
-
-  ngOnInit() {
-    this.sections = this.sectionService.getSections();
-    this.downloadUser();
-  }
-
-  private downloadUser() {
-    const token = this.localStorageService.getItem<TokenResponse>('auth-token');
-    if (token) {
-      this.userService.find('code', token.userCode).subscribe(
-        (user: User) => {
-          this.user = user;
-          this.showLoginRequired = false;
-          this.loadProgress(user.progress.activity);
-        }
-      );
-    } else {
-      this.showLoginRequired = !this.localStorageService.getItem<boolean>('use-app-without-user');
-      this.loadProgress(this.getDefaultProgress());
-      console.log(`There is no token.... 😳😭🥶😓`);
-    }
-  }
-
-  private loadProgress(userProgress: Progress[]) {
-    this.sections.forEach(section => {
-      section.current = userProgress
-        .find(userSectionProgress => userSectionProgress.sectionId === section.id)
-        .verbs
-        .filter(verb => verb.completed)
-        .length;
-    });
-  }
-
-  startExercises(section: Section) {
-    this.router
-      .navigateByUrl(`/exercises/${section.id}`)
-      .catch(console.error);
-  }
-
-  closeLoginRequired() {
-    this.showLoginRequired = false;
-    this.localStorageService.setItem<boolean>('use-app-without-user', true);
-  }
-
-  private getDefaultProgress(): Progress[] {
+  private static getDefaultProgress(): Progress[] {
     return [
       {
         sectionId: 1,
@@ -603,6 +553,65 @@ export class HomeComponent implements OnInit {
         ]
       }
     ];
+  }
+
+  constructor(private router: Router,
+              private verbService: VerbService,
+              private userService: UserService,
+              private sectionService: SectionService,
+              private localStorageService: LocalStorageService) {
+  }
+
+  ngOnInit() {
+    this.sections = this.sectionService.getSections();
+    this.downloadUser();
+  }
+
+  private downloadUser() {
+    const token = this.localStorageService.getItem<Token>('auth-token');
+    if (token) {
+      this.userService.find('code', token.userCode).subscribe(
+        (user: User) => {
+          this.user = user;
+          this.showLoginRequired = false;
+          this.loadProgress(user.progress.activity);
+        }
+      );
+    } else {
+      this.showLoginRequired = !this.localStorageService.getItem<boolean>('use-app-without-user');
+      this.loadProgress(HomeComponent.getDefaultProgress());
+      console.log(`There is no token.... 😳😭🥶😓`);
+    }
+  }
+
+  private loadProgress(userProgress: Progress[]) {
+    this.sections.forEach(section => {
+      section.current = userProgress
+        .find(userSectionProgress => userSectionProgress.sectionId === section.id)
+        .verbs
+        .filter(verb => verb.completed)
+        .length;
+    });
+  }
+
+  startExercises(section: Section) {
+    this.router
+      .navigateByUrl(`/exercises/${section.id}`)
+      .catch(console.error);
+  }
+
+  closeLoginRequired() {
+    this.showLoginRequired = false;
+    this.localStorageService.setItem<boolean>('use-app-without-user', true);
+  }
+
+  getVerbIsCompleted(sectionId: number, verbId: number) {
+    const section = this.user.progress.activity.find(activity => activity.sectionId === sectionId);
+    if (section) {
+      const currentVerb = section.verbs.find(verb => verb.id === verbId);
+      return currentVerb ? currentVerb.completed : false;
+    }
+    return false;
   }
 
 }

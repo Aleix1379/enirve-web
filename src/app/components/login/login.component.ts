@@ -5,7 +5,7 @@ import {User} from '../../interfaces/User';
 import {SnackBarService} from '../../services/snackBar/snack-bar.service';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
-import {TokenResponse} from '../../interfaces/TokenResponse';
+import {Token} from '../../interfaces/Token';
 
 @Component({
   selector: 'app-login',
@@ -89,9 +89,9 @@ export class LoginComponent implements OnInit {
     } else {
       this.showLoading = true;
       this.userService.createToken(this.loginForm.email.value, this.loginForm.password.value).subscribe(
-        (data: TokenResponse) => {
+        (data: Token) => {
           this.showLoading = false;
-          this.localStorageService.setItem<TokenResponse>('auth-token', data);
+          this.localStorageService.setItem<Token>('auth-token', data);
           this.router
             .navigateByUrl('/')
             .catch(console.error);
@@ -168,6 +168,10 @@ export class LoginComponent implements OnInit {
     const reader = new FileReader();
     // Closure to capture the file information.
     reader.onload = ((theFile) => {
+      if (theFile) {
+        console.log(`the file:`);
+        console.log(theFile);
+      }
       return (e) => {
         this.registerForm.picture = 'data:image/png;base64,' + window.btoa(e.target.result);
       };

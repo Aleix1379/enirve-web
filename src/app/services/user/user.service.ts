@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../../interfaces/User';
+import {ActivityUpdateProgress, User} from '../../interfaces/User';
 import {SharedService} from '../shared/shared.service';
-import {TokenResponse} from '../../interfaces/TokenResponse';
+import {Token} from '../../interfaces/Token';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,12 @@ export class UserService {
     return this.http.post<User>(this.userUrl, data);
   }
 
-  public createToken(email: string, password: string): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>(this.tokenUrl, {email, password});
+  public createToken(email: string, password: string): Observable<Token> {
+    return this.http.post<Token>(this.tokenUrl, {email, password});
+  }
+
+  public updateProgress(data: ActivityUpdateProgress): Observable<User> {
+    return this.http.put<User>(`${this.userUrl}/progress`, data);
   }
 
 }

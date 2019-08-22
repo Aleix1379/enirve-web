@@ -9,6 +9,7 @@ import {ComponentsModule} from './components/components.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PipesModule} from './pipes/pipes.module';
 import {HttpClientModule} from '@angular/common/http';
+import {InterceptorModule} from './interceptor.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     ComponentsModule,
     HttpClientModule,
+    InterceptorModule,
     PipesModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],

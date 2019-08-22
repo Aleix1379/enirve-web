@@ -13,6 +13,7 @@
 
     <div class="verbs-list">
       <div *ngFor="let verb of section.verbs" class="verbs-list__item">
+        <i class="far fa-check-circle verb-completed" *ngIf="user && getVerbIsCompleted(section.id, verb.id)"></i>
         {{verb.present}}
       </div>
     </div>

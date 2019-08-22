@@ -15,7 +15,7 @@
     <div *ngFor="let mistake of mistakes" class="mistake-item">{{mistake}}</div>
   </div>
 
-  <div class="resume-points-earned resume-section">
+  <div class="resume-points-earned resume-section" *ngIf="points > 0">
     <div class="resume-label resume-points-earned__message">Well done, you've earned</div>
     <div class="resume-label resume-points-earned__points">{{points}} points</div>
   </div>
