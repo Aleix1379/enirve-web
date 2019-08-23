@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PipesModule} from './pipes/pipes.module';
 import {HttpClientModule} from '@angular/common/http';
 import {InterceptorModule} from './interceptor.module';
+import {MatListModule, MatSidenavModule} from '@angular/material';
 
 
 @NgModule({
@@ -24,10 +25,13 @@ import {InterceptorModule} from './interceptor.module';
     HttpClientModule,
     InterceptorModule,
     PipesModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }

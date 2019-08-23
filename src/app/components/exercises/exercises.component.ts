@@ -9,6 +9,10 @@ import {VerbService} from '../../services/verb/verb.service';
 import {MatDialog} from '@angular/material';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 import {SharedService} from '../../services/shared/shared.service';
+import {EventsService} from '../../services/events/events.service';
+import {DeviceService} from '../../services/device/device.service';
+import {Config} from '../../interfaces/Config';
+import {LocalStorageService} from '../../services/localStorage/local-storage.service';
 
 @Component({
   selector: 'app-exercises',
@@ -21,6 +25,11 @@ export class ExercisesComponent implements OnInit {
   private currentUserIndex = 0;
   private formChecked = false;
   private mistakes: string[] = [];
+  private withoutData = true;
+  private readonly config: Config;
+  private readonly languages = {
+    es: 'Spanish'
+  };
 
   private progress: ProgressCounter = {
     success: 0,
@@ -31,38 +40,113 @@ export class ExercisesComponent implements OnInit {
   pastSimple = new FormControl({value: '', disabled: false});
   pastParticiple = new FormControl({value: '', disabled: false});
 
+  private static verbCheckTranslation(verb: Verb, translation: string, language: string): boolean {
+    if (!translation) {
+      return false;
+    }
+    return verb.translations[language] === translation.trim().toLowerCase();
+  }
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private sectionService: SectionService,
               private paramsService: SharedService,
               private verbService: VerbService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private deviceService: DeviceService,
+              private eventsService: EventsService,
+              private localStorageService: LocalStorageService
+  ) {
+
+    this.mistakes = [];
+    this.progress = {success: 0, errors: 0};
+
+    this.eventsService.subscribe('activity-section', (data => {
+
+      if (this.progress.success === 0 && this.progress.errors === 0) {
+        this.changeSection(data);
+      } else {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+          data: {
+            title: 'Change the section',
+            subtitle: 'Are you sure?',
+            message: 'You will lose all the progress.'
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.changeSection(data);
+          }
+        });
+      }
+
+    }));
+
+    this.config = this.localStorageService.getItem<Config>('config');
+
   }
 
   ngOnInit() {
     const routeParams = this.route.snapshot.params;
-    this.section = this.sectionService.getSectionById(Number(routeParams.sectionId));
-    this.currentVerb = this.section.verbs[this.currentUserIndex];
 
-    this.mistakes = this.paramsService.get('mistakes');
-
-    if (!this.mistakes) {
-      this.mistakes = [];
+    if (
+      !this.deviceService.isPhone() &&
+      !this.deviceService.isTabPort() &&
+      !this.deviceService.isDesktop() &&
+      !this.deviceService.isBigDesktop()
+    ) {
+      // this.withoutData = true;
+      this.router.navigateByUrl('/').catch(console.error);
+      return;
     }
 
-    if (this.mistakes.length > 0) {
-      this.section.verbs = [];
-      this.mistakes.forEach(verbPresent => {
-        this.section.verbs.push(this.verbService.getByName(verbPresent));
-      });
+    this.section = this.sectionService.getSectionById(Number(routeParams.sectionId));
+    this.loadData();
+  }
+
+  private changeSection(data) {
+    this.section = data.section;
+    this.loadData();
+    this.progress = {success: 0, errors: 0};
+    this.formChecked = false;
+    this.resetForm();
+    this.currentUserIndex = 0;
+    this.currentVerb = this.section.verbs[this.currentUserIndex];
+  }
+
+  loadData(): void {
+    if (!this.section) {
+      this.withoutData = true;
+    } else {
+      this.withoutData = false;
+      this.currentVerb = this.section.verbs[this.currentUserIndex];
+      this.mistakes = this.paramsService.get('mistakes');
+
+      if (!this.mistakes) {
+        this.mistakes = [];
+      }
+
+      if (this.mistakes.length > 0) {
+        this.section.verbs = [];
+        this.mistakes.forEach(verbPresent => {
+          this.section.verbs.push(this.verbService.getByName(verbPresent));
+        });
+        this.mistakes = [];
+      }
     }
   }
 
   check() {
-    const resultTranslation = this.verbCheckTranslation(this.currentVerb, this.translation.value, 'spanish');
-    if (!resultTranslation) {
-      this.translation.setErrors({incorrect: true});
-      this.translation.markAsTouched({onlySelf: true});
+    let resultTranslation = true;
+    if (this.isTranslationEnabled()) {
+      resultTranslation = ExercisesComponent
+        .verbCheckTranslation(this.currentVerb, this.translation.value, this.getTranslationLanguage(true));
+
+      if (!resultTranslation) {
+        this.translation.setErrors({incorrect: true});
+        this.translation.markAsTouched({onlySelf: true});
+      }
     }
 
     const resultPastSimple = this.verbCheckPast(this.currentVerb, this.pastSimple.value, 'simple');
@@ -93,10 +177,14 @@ export class ExercisesComponent implements OnInit {
     if (this.currentUserIndex < this.section.verbs.length - 1) {
       this.currentUserIndex++;
       this.currentVerb = this.section.verbs[this.currentUserIndex];
-      this.translation.setValue('');
-      this.pastSimple.setValue('');
-      this.pastParticiple.setValue('');
+      this.resetForm();
     }
+  }
+
+  private resetForm() {
+    this.translation.setValue('');
+    this.pastSimple.setValue('');
+    this.pastParticiple.setValue('');
   }
 
   finish() {
@@ -108,14 +196,6 @@ export class ExercisesComponent implements OnInit {
       .navigateByUrl(`/resume`)
       .catch(console.error);
   }
-
-  private verbCheckTranslation(verb: Verb, translation: string, language: string): boolean {
-    if (!translation) {
-      return false;
-    }
-    return verb.translations[language] === translation.trim().toLowerCase();
-  }
-
 
   private verbCheckPast(verb: Verb, value: string, tense: string): boolean {
     if (verb[tense].includes('/')) {
@@ -137,12 +217,37 @@ export class ExercisesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result &&
+        (
+          this.deviceService.isPhone() ||
+          this.deviceService.isTabPort() ||
+          this.deviceService.isDesktop() ||
+          this.deviceService.isBigDesktop()
+        )
+      ) {
         this.router
           .navigateByUrl(`/`)
           .catch(console.error);
       }
     });
+  }
+
+  isTranslationEnabled(): boolean {
+    if (!this.config) {
+      return false;
+    }
+    return !!this.config.translateLanguage;
+  }
+
+  getTranslationLanguage(lowerCase: boolean = false): string {
+    if (!this.config) {
+      return null;
+    }
+    const language: string = this.languages[this.config.translateLanguage];
+    if (lowerCase && !!language) {
+      return language.toLowerCase();
+    }
+    return language;
   }
 
 }

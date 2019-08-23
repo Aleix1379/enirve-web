@@ -8,6 +8,8 @@ import {ActivityUpdateProgress, ActivityUpdateProgressVerbs} from '../../interfa
 import {SnackBarService} from '../../services/snackBar/snack-bar.service';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
 import {Token} from '../../interfaces/Token';
+import {DeviceService} from '../../services/device/device.service';
+import {EventsService} from '../../services/events/events.service';
 
 @Component({
   selector: 'app-resume',
@@ -25,7 +27,9 @@ export class ResumeComponent implements OnInit {
               private paramsService: SharedService,
               private userService: UserService,
               private snackBarService: SnackBarService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private deviceService: DeviceService,
+              private eventsService: EventsService) {
   }
 
   ngOnInit() {
@@ -88,9 +92,17 @@ export class ResumeComponent implements OnInit {
 
   repeatWrongVerbs() {
     this.paramsService.set('mistakes', this.mistakes);
-    this.router
-      .navigateByUrl(`/exercises/${this.section.id}`)
-      .catch(console.error);
+    this.mistakes = [];
+    if (this.deviceService.isPhone() || this.deviceService.isTabPort()) {
+      this.router
+        .navigateByUrl(`/exercises/${this.section.id}`)
+        .catch(console.error);
+    } else {
+      this.router
+        .navigateByUrl(`/`)
+        .then(() => this.eventsService.publish('activity-repeat', {section: this.section}))
+        .catch(console.error);
+    }
   }
 
   finish() {

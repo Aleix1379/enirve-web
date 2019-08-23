@@ -6,6 +6,8 @@ import {SnackBarService} from '../../services/snackBar/snack-bar.service';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
 import {Token} from '../../interfaces/Token';
+import {DeviceService} from '../../services/device/device.service';
+import {EventsService} from '../../services/events/events.service';
 
 @Component({
   selector: 'app-login',
@@ -66,14 +68,18 @@ export class LoginComponent implements OnInit {
 
   showLoading = false;
   selectedTab = 0;
+  isDesktop: boolean;
 
   constructor(private userService: UserService,
               private snackBarService: SnackBarService,
               private router: Router,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private deviceService: DeviceService,
+              private eventsService: EventsService) {
   }
 
   ngOnInit() {
+    this.isDesktop = this.deviceService.isDesktop() || this.deviceService.isBigDesktop();
   }
 
   login() {
@@ -85,13 +91,14 @@ export class LoginComponent implements OnInit {
       this.loginForm.email.hasError('email') ||
       this.loginForm.password.hasError('required')
     ) {
-      this.snackBarService.show('There are error on the form');
+      this.snackBarService.show('There are errors on the form');
     } else {
       this.showLoading = true;
       this.userService.createToken(this.loginForm.email.value, this.loginForm.password.value).subscribe(
         (data: Token) => {
           this.showLoading = false;
           this.localStorageService.setItem<Token>('auth-token', data);
+          this.eventsService.publish('user-logined', {});
           this.router
             .navigateByUrl('/')
             .catch(console.error);
@@ -132,7 +139,7 @@ export class LoginComponent implements OnInit {
       this.snackBarService.show(errorMessage);
     } else {
       this.showLoading = true;
-      let userPicture = 'default.png';
+      let userPicture = 'user-default.png';
       if (this.registerForm.picture !== '../../../assets/images/user.png') {
         userPicture = this.registerForm.picture;
       }

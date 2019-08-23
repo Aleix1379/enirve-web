@@ -8,7 +8,7 @@ import {SafePipe} from './safe/safe.pipe';
   ],
   imports: [],
   exports: [
-    SafePipe
+    SafePipe,
   ]
 })
 export class PipesModule {

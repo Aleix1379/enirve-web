@@ -1,13 +1,18 @@
+<app-header *ngIf="isDesktop" [userImage]="userImage" [currentPath]="currentPath"></app-header>
+
 <router-outlet></router-outlet>
-<nav class="bottom-nav" *ngIf="showTabs">
+
+<app-footer *ngIf="isDesktop"></app-footer>
+
+<nav class="bottom-nav" *ngIf="!isDesktop && showTabs">
   <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 1}"
      (click)="setTab(1)" [routerLink]="'/'">
     <i class="fas fa-crown"></i>
   </a>
 
   <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 2}"
-     (click)="setTab(2)" [routerLink]="'/practice'">
-    <i class="fas fa-diagnoses"></i>
+     (click)="setTab(2)" [routerLink]="'/profile'">
+    <i class="fas fa-user-cog"></i>
   </a>
 
 </nav>

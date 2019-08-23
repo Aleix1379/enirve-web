@@ -1,7 +1,19 @@
 @import "../../../variables";
+@import "../../../mixins";
 
 .resume {
   padding: 16px;
+
+  @include respond(tab-land) {
+    padding: 30px 100px;
+  }
+
+  @include respond(tab-port) {
+    padding: 30px 100px;
+  }
+
+  @include layoutDesktop;
+
 }
 
 .resume-section {
@@ -41,9 +53,37 @@
   }
 }
 
-.resume-btn {
-  margin: 32px auto 0;
-  display: block;
-  width: 100%;
+.resume-actions {
+  display: flex;
+  flex-direction: column;
+
+  @include respond(tab-land) {
+    flex-direction: row;
+    margin-top: 50px;
+  }
+
+  @include respond(tab-port) {
+    flex-direction: row;
+    margin-top: 50px;
+  }
+
+  .resume-btn {
+    margin: 32px auto 0;
+    display: block;
+
+    @include respond (phone) {
+      width: 100%;
+    }
+
+    @include respond(tab-port) {
+      width: 250px;
+    }
+
+    @include respond(tab-land) {
+      width: 300px;
+    }
+
+  }
+
 }
 

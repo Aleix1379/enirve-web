@@ -1,52 +1,65 @@
-<div class="exercises-container">
+<div id="app-exercises" class="exercises-container">
 
-  <i class="fas fa-times exercises-container__close" (click)="cancelExerciceDialog()"></i>
+  <div *ngIf="!withoutData">
 
-  <app-horizontal-progress-bar [current]="progress.success + progress.errors"
-                               [total]="section.verbs.length"></app-horizontal-progress-bar>
+    <i class="fas fa-times exercises-container__close" (click)="cancelExerciceDialog()"></i>
 
-  <app-progress-counter [progress]="progress"></app-progress-counter>
+    <app-horizontal-progress-bar [current]="progress.success + progress.errors"
+                                 [total]="section?.verbs?.length"></app-horizontal-progress-bar>
 
-  <div class="exercice-verb-present">
-    Verb: {{currentVerb.present}}
+    <app-progress-counter [progress]="progress"></app-progress-counter>
+
+    <div class="exercice-verb-present">
+      Verb: {{currentVerb?.present}}
+    </div>
+
+    <div class="exercice-form-container">
+      <mat-form-field *ngIf="isTranslationEnabled()">
+        <label>
+          <input matInput [placeholder]="'Enter the translation in ' + getTranslationLanguage()"
+                 [formControl]="translation"
+                 [readonly]="formChecked" [disabled]="formChecked">
+        </label>
+        <i class="fas fa-check-circle form-verb-correct" *ngIf="formChecked && !translation.invalid"></i>
+        <mat-error *ngIf="translation.invalid">{{currentVerb.translations[getTranslationLanguage(true)]}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Enter the past simple" [formControl]="pastSimple"
+                 [readonly]="formChecked" [disabled]="formChecked">
+        </label>
+        <i class="fas fa-check-circle form-verb-correct" *ngIf="formChecked && !pastSimple.invalid"></i>
+        <mat-error *ngIf="pastSimple.invalid">{{currentVerb.simple}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Enter the past participle" [formControl]="pastParticiple"
+                 [readonly]="formChecked" [disabled]="formChecked">
+        </label>
+        <i class="fas fa-check-circle form-verb-correct" *ngIf="formChecked && !pastParticiple.invalid"></i>
+        <mat-error *ngIf="pastParticiple.invalid">{{currentVerb.participle}}</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="check()" *ngIf="!formChecked">CHECK</button>
+      <button mat-raised-button color="primary" (click)="next()"
+              *ngIf="formChecked && currentUserIndex < section.verbs.length - 1">
+        NEXT
+      </button>
+      <button mat-raised-button color="primary" (click)="finish()"
+              *ngIf="formChecked && currentUserIndex == section.verbs.length - 1">
+        FINISH
+      </button>
+    </div>
+
   </div>
 
-  <div class="exercice-form-container">
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="Enter the translation in Spanish" [formControl]="translation"
-               [readonly]="formChecked" [disabled]="formChecked">
-      </label>
-      <mat-error *ngIf="translation.invalid">{{currentVerb.translations['spanish']}}</mat-error>
-    </mat-form-field>
+  <div *ngIf="withoutData" class="exercises-withou-data">
+    <h1 class="exercises-withou-data__title">To start to practice choose one section and press start</h1>
 
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="Enter the past simple" [formControl]="pastSimple"
-               [readonly]="formChecked" [disabled]="formChecked">
-      </label>
-      <mat-error *ngIf="pastSimple.invalid">{{currentVerb.simple}}</mat-error>
-    </mat-form-field>
+    <img src="assets/images/launch.svg" alt="launch.svg" class="exercises-withou-data__image">
 
-    <mat-form-field>
-      <label>
-        <input matInput placeholder="Enter the past participle" [formControl]="pastParticiple"
-               [readonly]="formChecked" [disabled]="formChecked">
-      </label>
-      <mat-error *ngIf="pastParticiple.invalid">{{currentVerb.participle}}</mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="check()" *ngIf="!formChecked">CHECK</button>
-    <button mat-raised-button color="primary" (click)="next()"
-            *ngIf="formChecked && currentUserIndex < section.verbs.length - 1">
-      NEXT
-    </button>
-    <button mat-raised-button color="primary" (click)="finish()"
-            *ngIf="formChecked && currentUserIndex == section.verbs.length - 1">
-      FINISH
-    </button>
   </div>
-
-  <!--<pre>{{section | json}}</pre>-->
 
 </div>
