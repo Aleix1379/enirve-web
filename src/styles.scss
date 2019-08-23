@@ -50,6 +50,15 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  @include respond(desktop) {
+    background: whitesmoke;
+  }
+
+  @include respond(big-desktop) {
+    background: whitesmoke;
+  }
+
 }
 
 a:active {
@@ -105,4 +114,12 @@ a:active {
 
 .shadow-none {
   box-shadow: none;
+}
+
+.mat-drawer-container {
+  height: 100vh;
+}
+
+.cdk-overlay-container {
+  z-index: 99999999999;
 }

@@ -2,9 +2,7 @@
 
   <app-loading *ngIf="showLoading"></app-loading>
 
-  <mat-card>
-
-    <div class="login-title">Welcome to Enirve</div>
+  <mat-card class="login-form">
 
     <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="changeTab($event)">
       <mat-tab label="Login">
@@ -37,7 +35,7 @@
             LOGIN
           </button>
 
-          <a [routerLink]="'/forgot-your-password'" class="login-forgot-password">Forgot your password?</a>
+<!--          <a [routerLink]="'/forgot-your-password'" class="login-forgot-password">Forgot your password?</a>-->
 
         </div>
 

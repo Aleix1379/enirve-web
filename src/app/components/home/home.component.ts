@@ -7,6 +7,8 @@ import {UserService} from '../../services/user/user.service';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
 import {Token} from '../../interfaces/Token';
 import {Progress, User} from '../../interfaces/User';
+import {DeviceService} from '../../services/device/device.service';
+import {EventsService} from '../../services/events/events.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,7 @@ import {Progress, User} from '../../interfaces/User';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  showLoading = false;
   sections: Section[];
   user: User;
   showLoginRequired = false;
@@ -559,7 +562,13 @@ export class HomeComponent implements OnInit {
               private verbService: VerbService,
               private userService: UserService,
               private sectionService: SectionService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private deviceService: DeviceService,
+              private eventsService: EventsService) {
+
+    this.eventsService.subscribe('activity-repeat', (data => {
+      this.startExercises(data.section);
+    }));
   }
 
   ngOnInit() {
@@ -570,6 +579,7 @@ export class HomeComponent implements OnInit {
   private downloadUser() {
     const token = this.localStorageService.getItem<Token>('auth-token');
     if (token) {
+      this.showLoading = true;
       this.userService.find('code', token.userCode).subscribe(
         (user: User) => {
           this.user = user;
@@ -585,6 +595,7 @@ export class HomeComponent implements OnInit {
   }
 
   private loadProgress(userProgress: Progress[]) {
+    this.showLoading = false;
     this.sections.forEach(section => {
       section.current = userProgress
         .find(userSectionProgress => userSectionProgress.sectionId === section.id)
@@ -595,9 +606,18 @@ export class HomeComponent implements OnInit {
   }
 
   startExercises(section: Section) {
-    this.router
-      .navigateByUrl(`/exercises/${section.id}`)
-      .catch(console.error);
+    if (
+      this.deviceService.isPhone() ||
+      this.deviceService.isTabPort() ||
+      this.deviceService.isDesktop() ||
+      this.deviceService.isBigDesktop()
+    ) {
+      this.router
+        .navigateByUrl(`/exercises/${section.id}`)
+        .catch(console.error);
+    } else {
+      this.eventsService.publish('activity-section', {section});
+    }
   }
 
   closeLoginRequired() {

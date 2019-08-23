@@ -1,0 +1,45 @@
+<div id="main-panel">
+
+  <mat-card id="card-mobile" class="eiv-panel">
+    <div>
+      <h1>Enirve for iOS</h1>
+
+      <div class="mobile-os">
+
+        <div id="mobile-images-list">
+
+ <!--         <div class="image-selected" *ngIf="imageSelected">
+            <img [src]="imageSelected" alt="image selected" *ngIf="imageSelected">
+          </div>-->
+
+     <!--     <div *ngFor="let image of images" class="image-list">
+            <img [src]="image" alt="image" (click)="selectImage(image)">
+          </div>-->
+          <slideshow [height]="'500px'"
+                     [autoPlay]="true"
+                     [showArrows]="false"
+                     [autoPlayInterval]="5000"
+                     [imageUrls]="images"
+                     [lazyLoad]="images?.length > 1"
+                     [autoPlayWaitForLazyLoad]="true">
+          </slideshow>
+        </div>
+
+        <div class="badge">
+          <a target="_blank" href="https://itunes.apple.com/gb/app/enirve/id1375091827?mt=8">
+            <img src="../../../assets/images/appstore-badge.svg" alt="Get it on App Store"/>
+          </a>
+        </div>
+      </div>
+
+ <!--     <div class="mobile-os">
+        <div class="badge">
+          <a target="_blank" href="https://itunes.apple.com/gb/app/enirve/id1375091827?mt=8">
+            <img src="assets/images/appstore-badge.svg" alt="Get it on App Store"/>
+          </a>
+        </div>
+      </div>-->
+
+    </div>
+  </mat-card>
+</div>

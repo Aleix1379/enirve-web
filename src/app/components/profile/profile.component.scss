@@ -1,0 +1,56 @@
+@import "../../../mixins";
+
+#profile-container {
+
+  @include respond(tab-land) {
+    padding: 30px 200px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include respond(tab-port) {
+    padding: 30px 100px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include layoutDesktop;
+}
+
+.profile-tab-content {
+  padding: 16px;
+
+  @include respond(desktop) {
+    max-width: 500px;
+    margin: 0 auto;
+
+    .profile-language-selection {
+      max-width: 250px;
+    }
+  }
+  @include respond(big-desktop) {
+    max-width: 500px;
+    margin: 0 auto;
+
+    .profile-language-selection {
+      max-width: 250px;
+    }
+  }
+}
+
+.profile-tab-config {
+  &__title {
+    margin-bottom: 20px;
+    display: block;
+  }
+}
+
+.profile-language-selection {
+  margin-top: 30px;
+
+  > mat-form-field {
+    width: 100%;
+  }
+}

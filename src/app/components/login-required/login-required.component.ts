@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 })
 export class LoginRequiredComponent implements OnInit {
   @Input() message: string;
+  @Input() onlyToLogin = false;
   @Output() close = new EventEmitter();
 
   constructor(private router: Router) {

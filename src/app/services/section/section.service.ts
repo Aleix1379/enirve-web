@@ -22,7 +22,7 @@ export class SectionService {
       this.sections.push(
         {
           id: i,
-          title: `Section ${i}`,
+          title: `Lesson ${i}`,
           current: null, // Math.floor(Math.random() * (8 + 1)), // data from server, user progress...
           max: sectionVerbs.length,
           verbs: sectionVerbs

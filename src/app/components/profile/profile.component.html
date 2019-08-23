@@ -1,0 +1,65 @@
+<app-login-required [message]="'You have not logged in, you cannot see your profile'"
+                    [onlyToLogin]="true"
+                    *ngIf="showLoginRequired">
+</app-login-required>
+
+<div *ngIf="!showLoginRequired" id="profile-container">
+
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="changeTab($event)">
+    <!--    <mat-tab label="User">
+
+          <div class="profile-tab-content">
+            <h1>User</h1>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Achievements">
+
+          <div class="profile-tab-content">
+            <h1>No avai</h1>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="Friends">
+
+          <div class="profile-tab-content">
+            <h1>Friends</h1>
+          </div>
+
+        </mat-tab>-->
+
+    <mat-tab label="Configuration" class="profile-tab-config">
+
+      <div class="profile-tab-content">
+
+        <span class="profile-tab-config__title">Enirve can ask you the translations of the verbs.</span>
+
+        <mat-slide-toggle
+          class="example-margin"
+          [color]="'primary'"
+          [checked]="translationEnabled"
+          (change)="translationEnabledToggle()">
+
+          Enable translation
+        </mat-slide-toggle>
+
+        <div *ngIf="translationEnabled" class="profile-language-selection">
+          <mat-form-field>
+            <mat-label>Choose the language to translate</mat-label>
+            <mat-select [(ngModel)]="config.translateLanguage" (valueChange)="translationLanguagechanged($event)">
+              <mat-option *ngFor="let language of languages" [value]="language.code">
+                {{language.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

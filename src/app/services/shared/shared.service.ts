@@ -28,7 +28,14 @@ export class SharedService {
     delete this.data[key];
   }
 
+  public getImagesUrl(): string {
+    return `${this.serverUrl}/public/images`;
+  }
+
   public getApiUrl(path: string) {
+    if (!path.startsWith('/')) {
+      path = `/${path}`;
+    }
     return `${this.serverUrl}/api/v1${path}`;
   }
 

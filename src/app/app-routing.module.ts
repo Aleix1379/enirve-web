@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
-import {PracticeComponent} from './components/practice/practice.component';
 import {ExercisesComponent} from './components/exercises/exercises.component';
 import {ResumeComponent} from './components/resume/resume.component';
 import {LoginComponent} from './components/login/login.component';
 import {ForgotYourPasswordComponent} from './components/forgot-your-password/forgot-your-password.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {LandingComponent} from './components/landing/landing.component';
+import {IosComponent} from './components/ios/ios.component';
 
 const routes: Routes = [
   {
@@ -13,8 +15,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'practice',
-    component: PracticeComponent
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: 'exercises/:sectionId',
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'forgot-your-password',
     component: ForgotYourPasswordComponent
+  },
+  {
+    path: 'about',
+    component: LandingComponent
+  },
+  {
+    path: 'ios',
+    component: IosComponent
   }
 ];
 

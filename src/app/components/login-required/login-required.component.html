@@ -10,7 +10,7 @@
             (click)="goToLogin()">GO TO LOGIN
     </button>
 
-    <button mat-raised-button color="primary" class="btn-full"
+    <button mat-raised-button color="primary" class="btn-full" *ngIf="!onlyToLogin"
             (click)="continueWithoutUser()">CONTINUE WITHOUT USER
     </button>
 

@@ -9,9 +9,11 @@ import {
   MatCardModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
+  MatListModule, MatSelectModule, MatSlideToggleModule,
   MatSnackBarModule,
-  MatTabsModule
+  MatTabsModule, MatToolbarModule
 } from '@angular/material';
 import {PracticeComponent} from './practice/practice.component';
 import {ExercisesComponent} from './exercises/exercises.component';
@@ -24,29 +26,39 @@ import {RouterModule} from '@angular/router';
 import {ForgotYourPasswordComponent} from './forgot-your-password/forgot-your-password.component';
 import {PipesModule} from '../pipes/pipes.module';
 import {SnackBarComponent} from './snack-bar/snack-bar.component';
-import { LoadingComponent } from './loading/loading.component';
-import { LoginRequiredComponent } from './login-required/login-required.component';
-
+import {LoadingComponent} from './loading/loading.component';
+import {LoginRequiredComponent} from './login-required/login-required.component';
+import {ProfileComponent} from './profile/profile.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {LandingComponent} from './landing/landing.component';
+import {IosComponent} from './ios/ios.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
 
 @NgModule({
   entryComponents: [
     ConfirmDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
   ],
   declarations: [
-    HomeComponent,
-    SectionHeaderComponent,
-    PracticeComponent,
-    ExercisesComponent,
-    HorizontalProgressBarComponent,
-    ResumeComponent,
-    ProgressCounterComponent,
     ConfirmDialogComponent,
-    LoginComponent,
+    ExercisesComponent,
+    FooterComponent,
     ForgotYourPasswordComponent,
-    SnackBarComponent,
+    HeaderComponent,
+    HomeComponent,
+    HorizontalProgressBarComponent,
+    IosComponent,
+    LandingComponent,
     LoadingComponent,
+    LoginComponent,
     LoginRequiredComponent,
+    PracticeComponent,
+    ProfileComponent,
+    ProgressCounterComponent,
+    ResumeComponent,
+    SectionHeaderComponent,
+    SnackBarComponent,
   ],
   imports: [
     CommonModule,
@@ -54,18 +66,27 @@ import { LoginRequiredComponent } from './login-required/login-required.componen
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
+    MatListModule,
     MatSnackBarModule,
-    MatTabsModule,
-    PipesModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    MatToolbarModule,
+    PipesModule,
     RoundProgressModule,
+    FormsModule,
     RouterModule,
+    SlideshowModule,
+    MatSlideToggleModule,
+    MatSelectModule,
   ],
   exports: [
     CommonModule,
     FormsModule,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

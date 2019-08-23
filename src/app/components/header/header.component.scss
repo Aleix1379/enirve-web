@@ -1,0 +1,73 @@
+@import '../../../_variables.scss';
+
+#header {
+  z-index: 9999999;
+  position: relative;
+}
+
+mat-toolbar {
+  -webkit-box-shadow: 0 2px 20px 8px rgba(66, 66, 66, 0.3);
+  -moz-box-shadow: 0 2px 20px 8px rgba(66, 66, 66, 0.3);
+  box-shadow: 0 2px 20px 8px rgba(66, 66, 66, 0.3);
+  background: $color-primary;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  #menu {
+    list-style-type: none;
+    width: 50%;
+    display: flex;
+
+    li {
+      margin-left: 30px;
+
+      &:focus {
+        outline: none !important;
+      }
+    }
+
+    li > a {
+      font-size: 15px;
+
+    }
+  }
+
+  #menu-right {
+    list-style-type: none;
+    width: 50%;
+    padding-right: 50px;
+
+    li {
+      float: right;
+      cursor: pointer;
+
+      &:focus {
+        outline: none !important;
+      }
+
+      > a {
+        font-size: 15px;
+      }
+    }
+
+  }
+
+}
+
+.user-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  right: 130px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+.menu-active {
+  color: $color-secondary-light !important;
+}
