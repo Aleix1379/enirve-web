@@ -228,6 +228,9 @@ export class ExercisesComponent implements OnInit {
         this.router
           .navigateByUrl(`/`)
           .catch(console.error);
+      } else {
+        this.section = null;
+        this.withoutData = true;
       }
     });
   }
