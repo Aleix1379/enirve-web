@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  private readonly serverUrl = 'http://localhost:3000';
+  private readonly serverUrl = environment.serverUrl;
 
   private data = {};
 
