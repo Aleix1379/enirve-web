@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://enirve.com:3000'
+  serverUrl: 'https://enirve.com'
 };
