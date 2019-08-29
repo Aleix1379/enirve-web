@@ -63,13 +63,16 @@ export class ProfileComponent implements OnInit {
 
       const userConnectedPromise = this.userService.findByCode(this.token.userCode).toPromise();
       const userProfilePromise = this.userService.find('username', this.username).toPromise();
+      const friendsPromise = this.userService.getFriends(this.token.userCode).toPromise();
 
       this.showLoading = true;
-      Promise.all([userConnectedPromise, userProfilePromise])
+      Promise.all([userConnectedPromise, userProfilePromise, friendsPromise])
         .then(result => {
           this.showLoading = false;
           this.userConnected = result[0];
           this.userProfile = result[1];
+          this.friends = result[2];
+          this.friends.push(this.userConnected);
           this.updateIsFollowing();
         })
         .catch(error => {
@@ -77,15 +80,6 @@ export class ProfileComponent implements OnInit {
           console.error('error downloading user data');
           console.error(error);
         });
-
-      this.userService.getFriends(this.token.userCode).subscribe(data => {
-        this.friends = data;
-        this.friends.push(this.userConnected);
-      }, error => {
-        console.error('error downloading friends');
-        console.error(error);
-      });
-
     }
   }
 
