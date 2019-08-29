@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
         (data: Token) => {
           this.showLoading = false;
           this.localStorageService.setItem<Token>('auth-token', data);
-          this.eventsService.publish('user-logined', {});
+          this.eventsService.publish('user-logined', data);
           this.router
             .navigateByUrl('/')
             .catch(console.error);
@@ -147,7 +147,8 @@ export class LoginComponent implements OnInit {
         username: this.registerForm.username.value,
         email: this.registerForm.email.value,
         password: this.registerForm.password.value,
-        picture: userPicture
+        picture: userPicture,
+        friends: []
       };
 
       this.userService.create(data).subscribe(

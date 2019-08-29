@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 export class SnackBarService {
 
   private defaultConfig: MatSnackBarConfig = {
-    duration: 5000,
+    duration: 3000,
     verticalPosition: 'top'
   };
 

@@ -11,7 +11,7 @@
   </a>
 
   <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 2}"
-     (click)="setTab(2)" [routerLink]="'/profile'">
+     (click)="setTab(2)" [routerLink]="'/profile/' + user?.username">
     <i class="fas fa-user-cog"></i>
   </a>
 

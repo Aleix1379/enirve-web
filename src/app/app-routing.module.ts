@@ -8,6 +8,7 @@ import {ForgotYourPasswordComponent} from './components/forgot-your-password/for
 import {ProfileComponent} from './components/profile/profile.component';
 import {LandingComponent} from './components/landing/landing.component';
 import {IosComponent} from './components/ios/ios.component';
+import {UserSearchComponent} from './components/user-search/user-search.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,9 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'profile',
-    component: ProfileComponent
+    path: 'profile/:username',
+    component: ProfileComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'exercises/:sectionId',
@@ -41,6 +43,10 @@ const routes: Routes = [
   {
     path: 'ios',
     component: IosComponent
+  },
+  {
+    path: 'search',
+    component: UserSearchComponent
   }
 ];
 

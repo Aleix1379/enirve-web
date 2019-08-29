@@ -1,0 +1,7 @@
+<div *ngFor="let friend of friends" class="profile-friend" (click)="visitProfile(friend.username)">
+  <div class="profile-friend__picture">
+    <img [src]="friend.picture | imageDownloader | async" alt="user picture">
+  </div>
+  <div class="profile-friend__username">{{friend.username}}</div>
+  <div class="profile-friend__points">{{friend.progress.points}} EXP</div>
+</div>

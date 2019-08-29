@@ -17,10 +17,19 @@ export class UserService {
               private shared: SharedService) {
   }
 
-  public find(key: string, value: string | number): Observable<User> {
-    console.log(`userUrl`);
-    console.log(`${this.userUrl}?${key}=${value}`);
+  public findByCode(userCode: string | number): Observable<User> {
+    return this.findUser('code', userCode);
+  }
 
+  public find(key: string, value: string | number): Observable<User> {
+    return this.findUser(key, value);
+  }
+
+  public filter(key: string, value: string | number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}?${key}=${value}&search=true`);
+  }
+
+  private findUser(key: string, value: string | number): Observable<User> {
     return this.http.get<User>(`${this.userUrl}?${key}=${value}`);
   }
 
@@ -34,6 +43,19 @@ export class UserService {
 
   public updateProgress(data: ActivityUpdateProgress): Observable<User> {
     return this.http.put<User>(`${this.userUrl}/progress`, data);
+  }
+
+  public getFriends(userId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}/${userId}/friends`);
+  }
+
+  public follow(userId: number, friendCode: number): Observable<User> {
+    return this.http.post<User>(`${this.userUrl}/${userId}/friends`, {userCode: friendCode});
+  }
+
+
+  public unfollow(userId: number, friendCode: number): Observable<User> {
+    return this.http.delete<User>(`${this.userUrl}/${userId}/friends/${friendCode}`);
   }
 
 }

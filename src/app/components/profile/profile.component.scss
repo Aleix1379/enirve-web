@@ -1,4 +1,5 @@
 @import "../../../mixins";
+@import "../../../variables";
 
 #profile-container {
 
@@ -21,6 +22,7 @@
 
 .profile-tab-content {
   padding: 16px;
+  height: calc(100vh - 90px);
 
   @include respond(desktop) {
     max-width: 500px;
@@ -52,5 +54,53 @@
 
   > mat-form-field {
     width: 100%;
+  }
+}
+
+.profile-read-only {
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+
+  &__picture {
+    padding-top: 32px;
+
+    > img {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      margin: 0 auto;
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+  &__username {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 31px;
+    font-weight: bold;
+    color: $color-grey-dark-3;
+  }
+
+  &__following {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  button {
+    margin-top: 32px;
+  }
+
+}
+
+.my-profile {
+  position: relative;
+
+  &__add-friend {
+    position: fixed;
+    right: 20px;
+    bottom: 60px;
+    z-index: 100;
   }
 }

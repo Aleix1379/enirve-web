@@ -1,0 +1,23 @@
+.search-container {
+  padding: 16px;
+}
+
+.search-input-container {
+  //margin-top: 40px;
+}
+
+.user-search-input {
+  width: calc(100% - 45px);
+  position: relative;
+  left: 45px;
+}
+
+.search-users-friends {
+  width: 100%;
+  display: block;
+
+  &__picture {
+    width: 100%;
+  }
+
+}

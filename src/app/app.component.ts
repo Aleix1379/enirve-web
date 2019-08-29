@@ -9,6 +9,7 @@ import {ImageService} from './services/image/image.service';
 import {EventsService} from './services/events/events.service';
 import {ConfigService} from './services/config/config.service';
 import {Config} from './interfaces/Config';
+import {User} from './interfaces/User';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
   userImage: string;
   currentPath: string;
   token: Token;
+  user: User;
 
   constructor(router: Router,
               private deviceService: DeviceService,
@@ -35,9 +37,11 @@ export class AppComponent {
 
     Prototypes.loadPrototypes();
 
-    this.eventsService.subscribe('user-logined', () => {
+    this.eventsService.subscribe('user-logined', (token: Token) => {
+      this.token = token;
       this.downloadUserImage();
       this.downloadUserConfig();
+      this.downloadUser();
     });
 
     this.isDesktop = this.deviceService.isDesktop() || this.deviceService.isBigDesktop();
@@ -45,6 +49,7 @@ export class AppComponent {
 
     this.downloadUserImage();
     this.downloadUserConfig();
+    this.downloadUser();
 
     console.log(`router.url:`);
     console.log(router.url);
@@ -55,9 +60,10 @@ export class AppComponent {
       if (router.url === '/') {
         this.tabIndex = 1;
         this.showTabs = true;
-      } else if (router.url === '/profile') {
+      } else if (router.url.includes('/profile')) {
         this.tabIndex = 2;
-        this.showTabs = true;
+        const username: string = router.url.split('/')[2];
+        this.showTabs = !this.user || this.user.username === username;
       } else {
         this.showTabs = false;
       }
@@ -71,6 +77,15 @@ export class AppComponent {
 
   setTab(index: number) {
     this.tabIndex = index;
+  }
+
+  private downloadUser() {
+    if (this.token) {
+      this.userService.findByCode(this.token.userCode).subscribe(data => {
+        this.user = data;
+        this.localStorageService.setItem<User>('user-connected', this.user);
+      }, error => console.error(error));
+    }
   }
 
   private downloadUserImage() {

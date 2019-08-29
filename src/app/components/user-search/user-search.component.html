@@ -1,0 +1,18 @@
+<div class="search-container">
+
+  <app-close></app-close>
+
+  <div class="search-input-container">
+    <form class="example-form">
+      <mat-form-field class="user-search-input">
+        <input matInput placeholder="Usear search" title="user search" [formControl]="search" (input)="searchUsers()">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <app-friends [friends]="users"></app-friends>
+
+  <img *ngIf="users.length == 0" src="../../../assets/images/following.svg" class="search-users-friends__picture"
+       alt="friends">
+
+</div>

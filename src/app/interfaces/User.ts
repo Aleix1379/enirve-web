@@ -29,5 +29,6 @@ export interface User {
   email: string;
   picture: string;
   password?: string;
+  friends: number[];
   progress?: ActivityProgress;
 }

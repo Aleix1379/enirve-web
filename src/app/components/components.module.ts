@@ -34,6 +34,9 @@ import {FooterComponent} from './footer/footer.component';
 import {LandingComponent} from './landing/landing.component';
 import {IosComponent} from './ios/ios.component';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import { UserSearchComponent } from './user-search/user-search.component';
+import {FriendsComponent} from './friends/friends.component';
+import { CloseComponent } from './close/close.component';
 
 @NgModule({
   entryComponents: [
@@ -59,6 +62,9 @@ import {SlideshowModule} from 'ng-simple-slideshow';
     ResumeComponent,
     SectionHeaderComponent,
     SnackBarComponent,
+    UserSearchComponent,
+    FriendsComponent,
+    CloseComponent,
   ],
   imports: [
     CommonModule,
