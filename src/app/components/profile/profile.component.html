@@ -82,7 +82,7 @@
     <app-close></app-close>
 
     <div class="profile-read-only__picture">
-      <img [src]="userProfile?.picture | imageDownloader | async" alt="user image">
+      <img [src]="userProfile?.picture | serverUrl" alt="user image">
     </div>
 
     <div class="profile-read-only__username">{{userProfile?.username}}</div>

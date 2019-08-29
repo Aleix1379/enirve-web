@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
 import {SafePipe} from './safe/safe.pipe';
-import { ImageDownloaderPipe } from './imageDownloader/image-downloader.pipe';
 import { SortPipe } from './sort/sort.pipe';
+import { ServerUrlPipe } from './serverUrl/server-url.pipe';
 
 
 @NgModule({
   declarations: [
     SafePipe,
-    ImageDownloaderPipe,
     SortPipe,
+    ServerUrlPipe,
   ],
   imports: [],
   exports: [
     SafePipe,
-    ImageDownloaderPipe,
     SortPipe,
+    ServerUrlPipe,
   ]
 })
 export class PipesModule {

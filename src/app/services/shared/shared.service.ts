@@ -29,7 +29,10 @@ export class SharedService {
     delete this.data[key];
   }
 
-  public getImagesUrl(): string {
+  public getImageUrl(imageName: string): string {
+    if (imageName) {
+      return `${this.serverUrl}/public/images/${imageName}`;
+    }
     return `${this.serverUrl}/public/images`;
   }
 

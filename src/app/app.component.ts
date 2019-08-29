@@ -5,7 +5,6 @@ import {DeviceService} from './services/device/device.service';
 import {LocalStorageService} from './services/localStorage/local-storage.service';
 import {Token} from './interfaces/Token';
 import {UserService} from './services/user/user.service';
-import {ImageService} from './services/image/image.service';
 import {EventsService} from './services/events/events.service';
 import {ConfigService} from './services/config/config.service';
 import {Config} from './interfaces/Config';
@@ -30,7 +29,6 @@ export class AppComponent {
               private deviceService: DeviceService,
               private userService: UserService,
               private localStorageService: LocalStorageService,
-              private imageService: ImageService,
               private eventsService: EventsService,
               private configService: ConfigService
   ) {
@@ -39,7 +37,6 @@ export class AppComponent {
 
     this.eventsService.subscribe('user-logined', (token: Token) => {
       this.token = token;
-      this.downloadUserImage();
       this.downloadUserConfig();
       this.downloadUser();
     });
@@ -47,7 +44,6 @@ export class AppComponent {
     this.isDesktop = this.deviceService.isDesktop() || this.deviceService.isBigDesktop();
     this.token = this.localStorageService.getItem<Token>('auth-token');
 
-    this.downloadUserImage();
     this.downloadUserConfig();
     this.downloadUser();
 
@@ -85,21 +81,6 @@ export class AppComponent {
         this.user = data;
         this.localStorageService.setItem<User>('user-connected', this.user);
       }, error => console.error(error));
-    }
-  }
-
-  private downloadUserImage() {
-    if (this.token) {
-      this.userService.find('code', this.token.userCode).subscribe(async data => {
-          this.imageService.downloadImage(data.picture)
-            .then(result => {
-              this.userImage = result;
-            })
-            .catch(console.error);
-
-        },
-        console.error
-      );
     }
   }
 
