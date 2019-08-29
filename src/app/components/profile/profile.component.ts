@@ -80,6 +80,7 @@ export class ProfileComponent implements OnInit {
 
       this.userService.getFriends(this.token.userCode).subscribe(data => {
         this.friends = data;
+        this.friends.push(this.userConnected);
       }, error => {
         console.error('error downloading friends');
         console.error(error);

@@ -1,4 +1,4 @@
-<div *ngFor="let friend of friends" class="profile-friend" (click)="visitProfile(friend.username)">
+<div *ngFor="let friend of friends | sort" class="profile-friend" (click)="visitProfile(friend.username)">
   <div class="profile-friend__picture">
     <img [src]="friend.picture | imageDownloader | async" alt="user picture">
   </div>

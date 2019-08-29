@@ -13,6 +13,7 @@ export class FriendsComponent implements OnInit {
   constructor(private router: Router
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    console.log(`consfriends`);
   }
 
   ngOnInit() {
