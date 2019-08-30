@@ -7,6 +7,8 @@ import {UserService} from '../../services/user/user.service';
 import {Token} from '../../interfaces/Token';
 import {Config} from '../../interfaces/Config';
 import {User} from '../../interfaces/User';
+import {FormControl, Validators} from '@angular/forms';
+import {EventsService} from '../../services/events/events.service';
 
 @Component({
   selector: 'app-profile',
@@ -38,12 +40,31 @@ export class ProfileComponent implements OnInit {
   showLoading = false;
   finishDownload = false;
 
+  registerForm = {
+    username: new FormControl(''),
+    email: new FormControl(
+      '',
+      [
+        Validators.email
+      ]
+    ),
+    password: new FormControl(''),
+    passwordRepeat: new FormControl(''),
+    picture: '../../../assets/images/user.png'
+  };
+
+  repeatData = {
+    username: false,
+    email: false
+  };
+
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService,
     private configService: ConfigService,
     private snackBarService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private eventsService: EventsService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
@@ -75,6 +96,7 @@ export class ProfileComponent implements OnInit {
           this.userProfile = result[1];
           this.friends = result[2];
           this.friends.push(this.userConnected);
+          this.initUserForm();
           this.updateIsFollowing();
         })
         .catch(error => {
@@ -154,4 +176,140 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  inputPassword(field: string) {
+    if (this.registerForm[field].value.length > 0) {
+      console.log(`touch!!!`);
+      this.registerForm[field].markAsTouched();
+    }
+  }
+
+  checkAvailability(field: string) {
+    console.log('checkAvailability');
+    if (this.registerForm[field].value !== this.userConnected[field]) {
+      setTimeout(() => {
+        this.userService.find(field, this.registerForm[field].value).subscribe(
+          () => this.repeatData[field] = true,
+          () => this.repeatData[field] = false
+        );
+      }, 100);
+    }
+
+  }
+
+  choosePicture(files: FileList) {
+    // const f = evt.target.files[0]; // FileList object
+    const fileToUpload: File = files.item(0);
+    const reader = new FileReader();
+    // Closure to capture the file information.
+    reader.onload = ((theFile) => {
+      if (theFile) {
+        console.log(`the file:`);
+        console.log(theFile);
+      }
+      return (e) => {
+        this.registerForm.picture = 'data:image/png;base64,' + window.btoa(e.target.result);
+      };
+    })(fileToUpload);
+    // Read in the image file as a data URL.
+    reader.readAsBinaryString(fileToUpload);
+  }
+
+  updateProfile() {
+    const keys = Object.keys(this.registerForm);
+    keys.forEach(key => this.registerForm[key].markAsTouched && this.registerForm[key].markAsTouched());
+
+    if (
+      this.repeatData.username ||
+      this.repeatData.email ||
+      this.registerForm.username.hasError('required') ||
+      this.registerForm.email.hasError('email') ||
+      this.registerForm.email.hasError('required') ||
+      this.registerForm.password.hasError('required') ||
+      this.registerForm.passwordRepeat.hasError('required') ||
+      (this.registerForm.password.value !== this.registerForm.passwordRepeat.value)
+    ) {
+
+      const numErrors = this.countErrors();
+      let errorMessage: string;
+      if (numErrors === 1) {
+        errorMessage = 'There is an error on the form';
+      } else {
+        errorMessage = 'There are errors on the form';
+      }
+      this.snackBarService.show(errorMessage);
+    } else {
+      this.showLoading = true;
+      let userPicture = 'user-default.png';
+      if (this.registerForm.picture !== '../../../assets/images/user.png') {
+        userPicture = this.registerForm.picture;
+      }
+      const data: User = {
+        username: this.registerForm.username.value,
+        email: this.registerForm.email.value,
+        password: this.registerForm.password.value,
+        picture: userPicture,
+        friends: []
+      };
+
+      this.userService.update(this.userConnected.code, data).subscribe(
+        (userUpdated: User) => {
+          this.showLoading = false;
+          this.snackBarService.show('Your profile has been updated successfully');
+          let changeUrl = false;
+          if (this.userConnected.username !== userUpdated.username) {
+            changeUrl = true;
+          }
+
+          this.userConnected = userUpdated;
+          this.localStorageService.setItem<User>('user-connected', userUpdated);
+          this.eventsService.publish('user-updated', userUpdated);
+
+          if (changeUrl) {
+            this.router.navigateByUrl(`/profile/${userUpdated.username}`).catch(console.error);
+          }
+        },
+        errorCreatingUser => {
+          this.snackBarService.show('Error updating the profile');
+          this.showLoading = false;
+          console.error(`Error updating user`);
+          console.error(errorCreatingUser);
+        }
+      );
+    }
+  }
+
+  private countErrors() {
+    let count = 0;
+    if (this.repeatData.username) {
+      count++;
+    }
+    if (this.repeatData.email) {
+      count++;
+    }
+    if (this.registerForm.username.hasError('required')) {
+      count++;
+    }
+    if (this.registerForm.email.hasError('email')) {
+      count++;
+    }
+    if (this.registerForm.email.hasError('required')) {
+      count++;
+    }
+    if (this.registerForm.password.hasError('required')) {
+      count++;
+    }
+    if (this.registerForm.passwordRepeat.hasError('required')) {
+      count++;
+    }
+    if ((this.registerForm.password.value !== this.registerForm.passwordRepeat.value)) {
+      count++;
+    }
+    return count;
+  }
+
+  private initUserForm() {
+    this.registerForm.username.setValue(this.userConnected.username);
+    this.registerForm.email.setValue(this.userConnected.email);
+    this.registerForm.picture = this.userConnected.picture;
+  }
 }

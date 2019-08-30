@@ -40,6 +40,8 @@ export class AppComponent {
       this.downloadUser();
     });
 
+    this.eventsService.subscribe('user-updated', (userUpdated: User) => this.user = userUpdated);
+
     this.isDesktop = this.deviceService.isDesktop() || this.deviceService.isBigDesktop();
     this.token = this.localStorageService.getItem<Token>('auth-token');
 

@@ -12,8 +12,10 @@
     </ul>
 
     <ul id="menu-right">
-      <li [routerLink]="'/profile/' + userName">
+      <li>
         <img [src]="userImage | serverUrl" alt="user picture" class="user-picture" *ngIf="userImage">
+      </li>
+      <li [routerLink]="'/profile/' + userName">
         <a [ngClass]="{'menu-active': currentPath?.includes('/profile')}">{{userName}}</a>
       </li>
     </ul>

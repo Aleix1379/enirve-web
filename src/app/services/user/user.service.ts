@@ -37,6 +37,10 @@ export class UserService {
     return this.http.post<User>(this.userUrl, data);
   }
 
+  public update(code: number, data: User): Observable<User> {
+    return this.http.put<User>(`${this.userUrl}/${code}`, data);
+  }
+
   public createToken(email: string, password: string): Observable<Token> {
     return this.http.post<Token>(this.tokenUrl, {email, password});
   }

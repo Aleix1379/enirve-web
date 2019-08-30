@@ -10,29 +10,103 @@
   <!-- your profile -->
   <mat-card *ngIf="userProfile?.code == token.userCode" class="my-profile">
 
-    <button mat-fab color="primary" class="my-profile__add-friend" [routerLink]="'/search'">
+    <button mat-fab color="primary" class="my-profile__add-friend" [routerLink]="'/search'" *ngIf="selectedTab == 1">
       <i class="fas fa-user-friends"></i>
     </button>
 
     <div *ngIf="!showLoginRequired">
 
       <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="changeTab($event)">
-        <!--    <mat-tab label="User">
+        <mat-tab label="User">
 
-              <div class="profile-tab-content">
-                <h1>User</h1>
-              </div>
+          <div class="profile-tab-content">
+            <div>
 
-            </mat-tab>
+              <img [src]="registerForm.picture | serverUrl" alt="user" class="register-user-image">
+              <button mat-button color="primary" class="btn-register-user-image">
+                Choose a picture
+                <input type="file"
+                       id="file"
+                       (change)="choosePicture($event.target.files)">
+              </button>
 
-            <mat-tab label="Achievements">
+              <div class="profile-points">{{userProfile?.progress.points}} EXP</div>
 
-              <div class="profile-tab-content">
-                <h1>No avai</h1>
-              </div>
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Enter the username"
+                         [formControl]="registerForm.username" (input)="checkAvailability('username')">
+                  <mat-error *ngIf="registerForm.username.touched && registerForm.username.hasError('required')">
+                    Username is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="repeatData.username">
+                    This username already exists
+                  </mat-error>
+                </label>
+              </mat-form-field>
 
-            </mat-tab>
-    -->
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Enter the email" type="email"
+                         [formControl]="registerForm.email" (input)="checkAvailability('email')">
+                  <mat-error
+                    *ngIf="registerForm.email.touched && registerForm.email.hasError('email') && !registerForm.email.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.email.touched && registerForm.email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="repeatData.email">
+                    This email already exists
+                  </mat-error>
+                </label>
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Enter the password" type="password" [formControl]="registerForm.password"
+                         (input)="inputPassword('password')">
+                  <mat-error *ngIf="registerForm.password.touched && registerForm.password.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                </label>
+              </mat-form-field>
+
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Repeat the password" type="password"
+                         (input)="inputPassword('passwordRepeat')"
+                         [formControl]="registerForm.passwordRepeat">
+                  <mat-error
+                    *ngIf="registerForm.passwordRepeat.touched && registerForm.passwordRepeat.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="registerForm.password.value != registerForm.passwordRepeat.value &&
+                          registerForm.password.touched && registerForm.passwordRepeat.touched &&
+                          !registerForm.passwordRepeat.hasError('required')">
+                    The passwords do not match
+                  </mat-error>
+                </label>
+              </mat-form-field>
+
+              <button mat-raised-button color="primary" class="btn-full" (click)="updateProfile()">
+                UPDATE
+              </button>
+
+            </div>
+          </div>
+
+        </mat-tab>
+
+        <!--
+                    <mat-tab label="Achievements">
+
+                      <div class="profile-tab-content">
+                        <h1>No avai</h1>
+                      </div>
+
+                    </mat-tab>
+            -->
         <mat-tab label="Friends">
 
           <div class="profile-tab-content">

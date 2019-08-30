@@ -9,7 +9,10 @@ export class ServerUrlPipe implements PipeTransform {
   constructor(private sharedService: SharedService) {
   }
 
-  transform(imageName: any, args?: any): any {
+  transform(imageName: string, args?: any): any {
+    if (imageName.startsWith('../../../assets/images') || imageName.startsWith('data:image')) {
+      return imageName;
+    }
     return `${this.sharedService.getImageUrl(imageName)}`;
   }
 
