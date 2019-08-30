@@ -1,5 +1,23 @@
+@import "../../../mixins";
+
 .search-container {
   padding: 16px;
+
+  @include respond(tab-land) {
+    padding: 30px 200px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include respond(tab-port) {
+    padding: 30px 100px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include layoutDesktop;
 }
 
 .search-input-container {

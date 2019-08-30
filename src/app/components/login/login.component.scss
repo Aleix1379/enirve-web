@@ -69,6 +69,11 @@
 }
 
 .login-form {
+
+  &__input {
+    margin-top: 30px;
+  }
+
   @include respond(desktop) {
     max-width: 500px;
     position: relative;

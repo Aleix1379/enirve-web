@@ -9,7 +9,7 @@
 
         <div>
 
-          <mat-form-field>
+          <mat-form-field class="login-form__input">
             <label>
               <input matInput placeholder="Enter the email" type="email" [formControl]="loginForm.email">
               <mat-error
@@ -22,7 +22,7 @@
             </label>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="login-form__input">
             <label>
               <input matInput placeholder="Enter the password" type="password" [formControl]="loginForm.password">
               <mat-error *ngIf="loginForm.password.touched && loginForm.password.hasError('required')">

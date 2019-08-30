@@ -12,9 +12,9 @@
     </ul>
 
     <ul id="menu-right">
-      <li routerLink="/profile">
-        <img [src]="userImage" alt="user picture" class="user-picture" *ngIf="userImage">
-        <a [ngClass]="{'menu-active': currentPath == '/profile'}">Profile</a>
+      <li [routerLink]="'/profile/' + userName">
+        <img [src]="userImage | serverUrl" alt="user picture" class="user-picture" *ngIf="userImage">
+        <a [ngClass]="{'menu-active': currentPath?.includes('/profile')}">{{userName}}</a>
       </li>
     </ul>
   </mat-toolbar>

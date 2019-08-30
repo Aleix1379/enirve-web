@@ -1,9 +1,12 @@
+@import "../../../variables";
+
 .profile-friend {
   $friend-size: 40px;
   display: flex;
   height: $friend-size;
   line-height: $friend-size;
   position: relative;
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-bottom: 16px;
@@ -17,6 +20,12 @@
       width: 100%;
       background: #c9c9c9;
     }
+  }
+
+  &__index {
+    margin-right: 15px;
+    margin-left: 5px;
+    color: $color-primary;
   }
 
   &__picture {
@@ -41,4 +50,10 @@
     margin-right: 15px;
   }
 
+}
+
+.is-user-connected {
+  > div {
+    color: $color-secondary-dark;
+  }
 }

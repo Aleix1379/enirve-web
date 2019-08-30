@@ -8,7 +8,7 @@
 <div id="profile-container">
 
   <!-- your profile -->
-  <div *ngIf="userProfile?.code == token.userCode" class="my-profile">
+  <mat-card *ngIf="userProfile?.code == token.userCode" class="my-profile">
 
     <button mat-fab color="primary" class="my-profile__add-friend" [routerLink]="'/search'">
       <i class="fas fa-user-friends"></i>
@@ -75,7 +75,7 @@
 
     </div>
 
-  </div>
+  </mat-card>
 
   <div *ngIf="userProfile && userProfile.code != token.userCode" class="profile-read-only">
 
@@ -87,21 +87,27 @@
 
     <div class="profile-read-only__username">{{userProfile?.username}}</div>
 
+    <div class="profile-read-only__points">{{userProfile?.progress.points}} EXP</div>
+
     <div *ngIf="following" class="profile-read-only__following">You are following this user</div>
 
     <div *ngIf="following">
-      <button mat-raised-button color="warn" class="btn-full" (click)="unfollow()">
+      <button mat-raised-button color="warn" id="profile-read-only-unfollow" class="btn-full" (click)="unfollow()">
         STOP TO FOLLOW
       </button>
     </div>
 
     <div *ngIf="!following">
-      <button mat-raised-button color="primary" class="btn-full" (click)="follow()">
+      <button mat-raised-button color="primary" id="profile-read-only-follow" class="btn-full" (click)="follow()">
         FOLLOW
       </button>
     </div>
 
 
+  </div>
+
+  <div *ngIf="!userProfile" id="user-does-not-exists">
+    <h1>The user {{username}} does not exists</h1>
   </div>
 
 </div>

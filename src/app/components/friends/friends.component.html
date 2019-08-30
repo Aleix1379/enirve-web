@@ -1,4 +1,6 @@
-<div *ngFor="let friend of friends | sort" class="profile-friend" (click)="visitProfile(friend.username)">
+<div *ngFor="let friend of friends | sort; let i = index" [attr.data-index]="i" class="profile-friend"
+     (click)="visitProfile(friend.username)" [ngClass]="{'is-user-connected': friend.code == token?.userCode}">
+  <div class="profile-friend__index">{{i + 1}}</div>
   <div class="profile-friend__picture">
     <img [src]="friend.picture | serverUrl" alt="user picture">
   </div>

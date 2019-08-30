@@ -18,7 +18,7 @@ export class LocalStorageService {
   /**
    * value = storage[key]
    */
-  getItem<T>(key: string): T {
+  getItem<T>(key: 'config' | 'auth-token' | 'user-connected' | 'use-app-without-user'): T {
     const item = localStorage.getItem(key);
     if (item) {
       return JSON.parse(item);
@@ -37,14 +37,14 @@ export class LocalStorageService {
   /**
    * delete storage[key]
    */
-  removeItem(key: string): void {
+  removeItem(key: 'config' | 'auth-token' | 'user-connected' | 'use-app-without-user'): void {
     localStorage.removeItem(key);
   }
 
   /**
    * storage[key] = value
    */
-  setItem<T>(key: string, value: T): void {
+  setItem<T>(key: 'config' | 'auth-token' | 'user-connected' | 'use-app-without-user', value: T): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 

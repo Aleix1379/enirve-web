@@ -20,7 +20,6 @@ export class AppComponent {
   tabIndex = 1;
   showTabs = true;
   isDesktop: boolean;
-  userImage: string;
   currentPath: string;
   token: Token;
   user: User;

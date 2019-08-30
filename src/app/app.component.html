@@ -1,4 +1,6 @@
-<app-header *ngIf="isDesktop" [userImage]="userImage" [currentPath]="currentPath"></app-header>
+<app-header *ngIf="isDesktop" [userName]="user?.username"
+            [userImage]="user?.picture" [currentPath]="currentPath">
+</app-header>
 
 <router-outlet></router-outlet>
 

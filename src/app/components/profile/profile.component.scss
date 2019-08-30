@@ -22,10 +22,14 @@
 
 .profile-tab-content {
   padding: 16px;
-  height: calc(100vh - 90px);
+
+  @include respond(phone) {
+    height: calc(100vh - 90px);
+  }
 
   @include respond(desktop) {
-    max-width: 500px;
+    height: calc(100vh - 245px);
+    //max-width: 500px;
     margin: 0 auto;
 
     .profile-language-selection {
@@ -33,7 +37,8 @@
     }
   }
   @include respond(big-desktop) {
-    max-width: 500px;
+    height: calc(100vh - 245px);
+    //max-width: 500px;
     margin: 0 auto;
 
     .profile-language-selection {
@@ -83,12 +88,21 @@
     color: $color-grey-dark-3;
   }
 
+  &__points {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 31px;
+    font-weight: bold;
+    color: $color-secondary-dark;
+  }
+
   &__following {
     text-align: center;
     margin-top: 32px;
   }
 
-  button {
+  #profile-read-only-follow,
+  #profile-read-only-unfollow {
     margin-top: 32px;
   }
 
@@ -96,11 +110,31 @@
 
 .my-profile {
   position: relative;
+  background: #f5f5f569;
+
+  @include respond(desktop) {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @include respond(big-desktop) {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   &__add-friend {
     position: fixed;
     right: 20px;
     bottom: 60px;
     z-index: 100;
+  }
+}
+
+#user-does-not-exists {
+  h1 {
+    text-align: center;
+    margin-top: 30px;
   }
 }

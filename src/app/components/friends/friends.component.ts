@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../interfaces/User';
 import {Router} from '@angular/router';
+import {LocalStorageService} from '../../services/localStorage/local-storage.service';
+import {Token} from '../../interfaces/Token';
 
 @Component({
   selector: 'app-friends',
@@ -9,14 +11,16 @@ import {Router} from '@angular/router';
 })
 export class FriendsComponent implements OnInit {
   @Input() friends: User[];
+  token: Token;
 
-  constructor(private router: Router
+  constructor(private router: Router,
+              private localStorageService: LocalStorageService
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    console.log(`consfriends`);
   }
 
   ngOnInit() {
+    this.token = this.localStorageService.getItem<Token>('auth-token');
   }
 
   visitProfile(username: string) {
