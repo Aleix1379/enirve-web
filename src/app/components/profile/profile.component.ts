@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
   username: string;
   following = false;
   showLoading = false;
+  finishDownload = false;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -52,7 +53,7 @@ export class ProfileComponent implements OnInit {
     console.log(`ng on init`);
     this.friends = [];
     this.username = this.router.url.split('/')[2];
-
+    this.finishDownload = false;
     this.token = this.localStorageService.getItem<Token>('auth-token');
     if (!this.token) {
       this.showLoginRequired = true;
@@ -68,6 +69,7 @@ export class ProfileComponent implements OnInit {
       this.showLoading = true;
       Promise.all([userConnectedPromise, userProfilePromise, friendsPromise])
         .then(result => {
+          this.finishDownload = true;
           this.showLoading = false;
           this.userConnected = result[0];
           this.userProfile = result[1];

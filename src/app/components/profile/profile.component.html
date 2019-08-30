@@ -106,7 +106,7 @@
 
   </div>
 
-  <div *ngIf="!userProfile" id="user-does-not-exists">
+  <div *ngIf="!userProfile && finishDownload" id="user-does-not-exists">
     <h1>The user {{username}} does not exists</h1>
   </div>
 
