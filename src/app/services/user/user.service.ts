@@ -45,8 +45,8 @@ export class UserService {
     return this.http.post<Token>(this.tokenUrl, {email, password});
   }
 
-  public updateProgress(data: ActivityUpdateProgress): Observable<User> {
-    return this.http.put<User>(`${this.userUrl}/progress`, data);
+  public updateProgress(data: ActivityUpdateProgress, userId: number): Observable<User> {
+    return this.http.put<User>(`${this.userUrl}/${userId}/progress`, data);
   }
 
   public getFriends(userId: number): Observable<User[]> {

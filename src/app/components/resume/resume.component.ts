@@ -59,7 +59,7 @@ export class ResumeComponent implements OnInit {
       activity: this.getIdsVerbsCorrect()
     };
 
-    this.userService.updateProgress(data).subscribe(
+    this.userService.updateProgress(data, this.token.userCode).subscribe(
       () => this.snackBarService.show('The progress has been saved'),
       error => {
         this.snackBarService.show('Error updating the progress');
