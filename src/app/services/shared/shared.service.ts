@@ -31,9 +31,9 @@ export class SharedService {
 
   public getImageUrl(imageName: string): string {
     if (imageName) {
-      return `${this.serverUrl}/public/images/${imageName}`;
+      return `${this.serverUrl}/api/v1/public/images/${imageName}`;
     }
-    return `${this.serverUrl}/public/images`;
+    return `${this.serverUrl}/api/v1/public/images`;
   }
 
   public getApiUrl(path: string) {
