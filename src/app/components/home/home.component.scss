@@ -23,9 +23,14 @@
 .sections-list {
   padding: 16px 16px 35px;
   overflow-y: scroll;
+  background: #ececec;
 
   &__item {
     margin-bottom: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background: white;
+    padding: 20px 10px;
+    border-radius: 5px;
   }
 
   @include respond(tab-port) {
