@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
   showLoginRequired = false;
   userConnected: User;
   userProfile: User;
-  friends: User[] = [];
   selectedTab = 0;
   token: Token;
   config: Config = {
@@ -72,12 +71,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     console.log(`ng on init`);
-    this.friends = [];
     this.username = this.router.url.split('/')[2];
     this.finishDownload = false;
     this.token = this.localStorageService.getItem<Token>('auth-token');
     if (!this.token) {
       this.showLoginRequired = true;
+      this.finishDownload = true;
     } else {
       this.showLoginRequired = false;
       this.config = this.localStorageService.getItem<Config>('config');
@@ -85,22 +84,20 @@ export class ProfileComponent implements OnInit {
 
       const userConnectedPromise = this.userService.findByCode(this.token.userCode).toPromise();
       const userProfilePromise = this.userService.find('username', this.username).toPromise();
-      const friendsPromise = this.userService.getFriends(this.token.userCode).toPromise();
 
       this.showLoading = true;
-      Promise.all([userConnectedPromise, userProfilePromise, friendsPromise])
+      Promise.all([userConnectedPromise, userProfilePromise])
         .then(result => {
           this.finishDownload = true;
           this.showLoading = false;
           this.userConnected = result[0];
           this.userProfile = result[1];
-          this.friends = result[2];
-          this.friends.push(this.userConnected);
           this.initUserForm();
           this.updateIsFollowing();
         })
         .catch(error => {
           this.showLoading = false;
+          this.finishDownload = true;
           console.error('error downloading user data');
           console.error(error);
         });

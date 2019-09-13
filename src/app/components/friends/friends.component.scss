@@ -1,4 +1,24 @@
+@import "../../../mixins";
 @import "../../../variables";
+
+#friends-container {
+
+  @include respond(tab-land) {
+    padding: 30px 200px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include respond(tab-port) {
+    padding: 30px 100px;
+    .profile-language-selection {
+      max-width: 200px;
+    }
+  }
+
+  @include layoutDesktop;
+}
 
 .profile-friend {
   $friend-size: 40px;
@@ -57,4 +77,11 @@
   > div {
     color: $color-secondary-dark;
   }
+}
+
+.add-friend {
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
+  z-index: 100;
 }

@@ -588,7 +588,7 @@ export class HomeComponent implements OnInit {
         }
       );
     } else {
-      this.showLoginRequired = !this.localStorageService.getItem<boolean>('use-app-without-user');
+      this.showLoginRequired = true;
       this.loadProgress(HomeComponent.getDefaultProgress());
       console.log(`There is no token.... 😳😭🥶😓`);
     }
@@ -622,7 +622,6 @@ export class HomeComponent implements OnInit {
 
   closeLoginRequired() {
     this.showLoginRequired = false;
-    this.localStorageService.setItem<boolean>('use-app-without-user', true);
   }
 
   getVerbIsCompleted(sectionId: number, verbId: number) {

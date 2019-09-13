@@ -1,9 +1,17 @@
-<div *ngFor="let friend of friends | sort; let i = index" [attr.data-index]="i" class="profile-friend"
-     (click)="visitProfile(friend.username)" [ngClass]="{'is-user-connected': friend.code == token?.userCode}">
-  <div class="profile-friend__index">{{i + 1}}</div>
-  <div class="profile-friend__picture">
-    <img [src]="friend.picture | serverUrl" alt="user picture">
+<div id="friends-container">
+
+  <button mat-fab color="primary" class="add-friend" [routerLink]="'/search'">
+    <i class="fas fa-user-friends"></i>
+  </button>
+
+  <div *ngFor="let friend of friends | sort; let i = index" [attr.data-index]="i" class="profile-friend"
+       (click)="visitProfile(friend.username)" [ngClass]="{'is-user-connected': friend.code == token?.userCode}">
+    <div class="profile-friend__index">{{i + 1}}</div>
+    <div class="profile-friend__picture">
+      <img [src]="friend.picture | serverUrl" alt="user picture">
+    </div>
+    <div class="profile-friend__username">{{friend.username}}</div>
+    <div class="profile-friend__points">{{friend.progress.points}} EXP</div>
   </div>
-  <div class="profile-friend__username">{{friend.username}}</div>
-  <div class="profile-friend__points">{{friend.progress.points}} EXP</div>
+
 </div>

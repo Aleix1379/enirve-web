@@ -9,6 +9,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {LandingComponent} from './components/landing/landing.component';
 import {IosComponent} from './components/ios/ios.component';
 import {UserSearchComponent} from './components/user-search/user-search.component';
+import {FriendsComponent} from './components/friends/friends.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: UserSearchComponent
+  },
+  {
+    path: 'friends',
+    component: FriendsComponent
   }
 ];
 

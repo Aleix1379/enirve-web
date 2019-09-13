@@ -57,8 +57,11 @@ export class AppComponent {
       if (router.url === '/') {
         this.tabIndex = 1;
         this.showTabs = true;
-      } else if (router.url.includes('/profile')) {
+      } else if (router.url === '/friends') {
         this.tabIndex = 2;
+        this.showTabs = true;
+      } else if (router.url.includes('/profile')) {
+        this.tabIndex = 3;
         const username: string = router.url.split('/')[2];
         this.showTabs = !this.user || this.user.username === username;
       } else {

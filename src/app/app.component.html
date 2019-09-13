@@ -13,8 +13,13 @@
   </a>
 
   <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 2}"
-     (click)="setTab(2)" [routerLink]="'/profile/' + user?.username">
-    <i class="fas fa-user-cog"></i>
+     (click)="setTab(2)" [routerLink]="'/friends'">
+    <i class="fas fa-users"></i>
+  </a>
+
+  <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 3}"
+     (click)="setTab(3)" [routerLink]="'/profile/' + user?.username" *ngIf="user">
+    <i class="fas fa-user"></i>
   </a>
 
 </nav>

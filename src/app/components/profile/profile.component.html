@@ -8,11 +8,7 @@
 <div id="profile-container">
 
   <!-- your profile -->
-  <mat-card *ngIf="userProfile?.code == token.userCode" class="my-profile">
-
-    <button mat-fab color="primary" class="my-profile__add-friend" [routerLink]="'/search'" *ngIf="selectedTab == 1">
-      <i class="fas fa-user-friends"></i>
-    </button>
+  <mat-card *ngIf="userProfile?.code == token?.userCode" class="my-profile">
 
     <div *ngIf="!showLoginRequired">
 
@@ -107,13 +103,13 @@
 
                     </mat-tab>
             -->
-        <mat-tab label="Friends">
+<!--        <mat-tab label="Friends">
 
           <div class="profile-tab-content">
             <app-friends [friends]="friends"></app-friends>
           </div>
 
-        </mat-tab>
+        </mat-tab>-->
 
         <mat-tab label="Configuration" class="profile-tab-config">
 

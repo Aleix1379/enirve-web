@@ -5,10 +5,12 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return value.sort((a, b) =>
-      a.progress.points > b.progress.points ? -1 : a.progress.points < b.progress.points ? 1 : 0
-    );
+  transform(items: any, args?: any): any {
+    if (items) {
+      return items.sort((a, b) =>
+        a.progress.points > b.progress.points ? -1 : a.progress.points < b.progress.points ? 1 : 0
+      );
+    }
   }
 
 }
