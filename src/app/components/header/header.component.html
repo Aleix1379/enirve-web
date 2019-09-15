@@ -4,11 +4,11 @@
 
     <ul id="menu">
       <li>
-        <a routerLink="/friends" [ngClass]="{'menu-active': currentPath == '/friends'}">Friends</a>
+        <a routerLink="/friends" [ngClass]="{'menu-active': currentPath == '/friends'}" *ngIf="userImage">Friends</a>
       </li>
-<!--      <li>-->
-<!--        <a routerLink="/ios" [ngClass]="{'menu-active': currentPath == '/ios'}">iOS</a>-->
-<!--      </li>-->
+      <!--      <li>-->
+      <!--        <a routerLink="/ios" [ngClass]="{'menu-active': currentPath == '/ios'}">iOS</a>-->
+      <!--      </li>-->
       <li>
         <a routerLink="/about" [ngClass]="{'menu-active': currentPath == '/about'}">About Enirve</a>
       </li>
