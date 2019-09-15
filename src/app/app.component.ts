@@ -7,7 +7,6 @@ import {Token} from './interfaces/Token';
 import {UserService} from './services/user/user.service';
 import {EventsService} from './services/events/events.service';
 import {ConfigService} from './services/config/config.service';
-import {Config} from './interfaces/Config';
 import {User} from './interfaces/User';
 
 @Component({
@@ -33,6 +32,11 @@ export class AppComponent {
   ) {
 
     Prototypes.loadPrototypes();
+
+    this.eventsService.subscribe('user-logout', () => {
+      this.user = null;
+      this.token = null;
+    });
 
     this.eventsService.subscribe('user-logined', (token: Token) => {
       this.token = token;

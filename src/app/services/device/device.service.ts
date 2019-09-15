@@ -51,11 +51,7 @@ export class DeviceService {
 
   @HostListener('window:resize', ['$event'])
   private getScreenSize(event?) {
-    console.log(`window:resize....`);
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-
-    console.log(`this.screenHeight: ${this.screenHeight}`);
-    console.log(`this.screenWidth: ${this.screenWidth}`);
   }
 }

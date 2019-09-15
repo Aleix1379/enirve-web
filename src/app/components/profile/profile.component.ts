@@ -275,6 +275,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  logout() {
+    console.log(`logut...`);
+    this.localStorageService.clear();
+    this.eventsService.publish('user-logout');
+    this.router.navigateByUrl('/login').catch(console.error);
+  }
+
   private countErrors() {
     let count = 0;
     if (this.repeatData.username) {

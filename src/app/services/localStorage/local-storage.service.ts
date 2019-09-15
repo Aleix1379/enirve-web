@@ -11,7 +11,7 @@ export class LocalStorageService {
   /**
    * value = storage[key]
    */
-  private static getItem<T>(key: 'config' | 'auth-token' | 'user-connected'): T {
+  private static getItem<T>(key: 'config' | 'auth-token' | 'user-connected' | 'user-search'): T {
     const item = localStorage.getItem(key);
     if (item) {
       return JSON.parse(item);
@@ -30,14 +30,14 @@ export class LocalStorageService {
   /**
    * delete storage[key]
    */
-  private static removeItem(key: 'config' | 'auth-token' | 'user-connected'): void {
+  private static removeItem(key: 'config' | 'auth-token' | 'user-connected' | 'user-search'): void {
     localStorage.removeItem(key);
   }
 
   /**
    * storage[key] = value
    */
-  private static setItem<T>(key: 'config' | 'auth-token' | 'user-connected', value: T): void {
+  private static setItem<T>(key: 'config' | 'auth-token' | 'user-connected' | 'user-search', value: T): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
@@ -47,7 +47,7 @@ export class LocalStorageService {
   /**
    * Empties the list associated with the object of all key/value pairs, if there are any.
    */
-  clear(): void {
+  private static clearAll(): void {
     localStorage.clear();
   }
 
@@ -78,11 +78,29 @@ export class LocalStorageService {
   public removeConfig() {
     LocalStorageService.removeItem('config');
   }
+
   public removeAuthToken() {
     LocalStorageService.removeItem('auth-token');
   }
+
   public removeUser() {
     LocalStorageService.removeItem('user-connected');
+  }
+
+  public clear() {
+    LocalStorageService.clearAll();
+  }
+
+  public setUserSearch(value: string) {
+    LocalStorageService.setItem('user-search', value);
+  }
+
+  public getUserSearch(): string {
+    return LocalStorageService.getItem('user-search');
+  }
+
+  public removeUserSearch(): void {
+    LocalStorageService.removeItem('user-search');
   }
 
 }

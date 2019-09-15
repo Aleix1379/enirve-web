@@ -5,17 +5,24 @@
 
   height: calc(100% - 32px);
   margin-top: 16px !important;
+
+  @include respond(phone) {
+    margin-top: 0 !important;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   overflow-y: scroll;
 
   @include respond(tab-land) {
-    padding: 30px 200px;
+    padding: 0 200px;
     .profile-language-selection {
       max-width: 200px;
     }
   }
 
   @include respond(tab-port) {
-    padding: 30px 100px;
+    padding: 0 100px;
     .profile-language-selection {
       max-width: 200px;
     }
@@ -42,6 +49,12 @@
 
 .profile-read-only {
   padding: 16px !important;
+
+  @include respond(phone) {
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+
   padding-top: 22px !important;
   position: relative;
 
@@ -202,4 +215,8 @@
   font-size: 31px;
   font-weight: bold;
   color: $color-secondary-dark;
+}
+
+.btn-logout {
+  margin-top: 32px!important;
 }

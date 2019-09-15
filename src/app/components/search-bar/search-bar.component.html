@@ -1,4 +1,5 @@
 <form id="search-input">
   <i class="fas fa-search search-icon"></i>
-  <input type="search" placeholder="Search" title="user search" name="search" [(ngModel)]="searchText" (input)="search()">
+  <input type="search" placeholder="Search" title="user search" name="search"
+         [ngModel]="searchText" (input)="search($event.target.value)">
 </form>

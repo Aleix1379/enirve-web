@@ -93,6 +93,7 @@
 .exercices-list-verbs-checked {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 8px;
 
   > div:not(:last-child) {
     margin-right: 8px;

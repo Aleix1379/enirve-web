@@ -2,7 +2,6 @@
 
 .search-container {
   padding: 16px;
-  background: fuchsia;
   display: flex;
   flex-direction: column;
 
@@ -29,6 +28,10 @@
 
   height: calc(100% - 32px);
   margin-top: 16px!important;
+
+  @include respond(phone) {
+    margin-top: 0!important;
+  }
 }
 
 .search-users-friends {

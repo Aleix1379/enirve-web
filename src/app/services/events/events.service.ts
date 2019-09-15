@@ -10,7 +10,7 @@ export class EventsService {
   constructor() {
   }
 
-  public publish(topic: string, eventData: any): void {
+  public publish(topic: string, eventData?: any): void {
     if (this.subscriptions[topic]) {
       this.subscriptions[topic](eventData);
     } else {

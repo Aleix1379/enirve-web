@@ -1,7 +1,7 @@
 @import "../../../variables";
+@import "../../../mixins";
 
 .header-container {
-  display: flex;
   align-items: center;
 
   app-close {
@@ -17,4 +17,44 @@
     margin-left: 16px;
   }
 
+  @include respond(phone) {
+    app-search-bar {
+      margin-left: 0;
+      margin-top: 16px;
+    }
+  }
+
+}
+
+.header-container--desktop {
+  display: none;
+  @include respond(tab-port) {
+    display: flex
+  }
+  @include respond(tab-land) {
+    display: flex
+  }
+  @include respond(desktop) {
+    display: flex
+  }
+  @include respond(big-desktop) {
+    display: flex
+  }
+}
+
+.header-container--mobile {
+  display: none;
+  @include respond(phone) {
+    display: flex;
+    flex-direction: column;
+    align-items: unset;
+
+    .header-title-container {
+      @include respond(phone) {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+  }
 }

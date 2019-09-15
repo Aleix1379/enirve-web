@@ -18,19 +18,18 @@
 
   @include layoutDesktop;
 
-  @include respond(desktop) {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  @include respond(big-desktop) {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  padding-left: 20px;
+  padding-right: 20px;
 
   height: calc(100% - 32px);
-  margin-top: 16px!important;
+  margin-top: 16px !important;
+
+  @include respond(phone) {
+    margin-top: 0 !important;
+  }
+
   padding-top: 16px;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .add-friend {
