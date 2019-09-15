@@ -4,7 +4,7 @@
 
     <ul id="menu">
       <li>
-        <a routerLink="/friends" [ngClass]="{'menu-active': currentPath == '/friends'}" *ngIf="userImage">Friends</a>
+        <a routerLink="/friends" [ngClass]="{'menu-active': currentPath == '/friends'}" *ngIf="userName">Friends</a>
       </li>
       <!--      <li>-->
       <!--        <a routerLink="/ios" [ngClass]="{'menu-active': currentPath == '/ios'}">iOS</a>-->
