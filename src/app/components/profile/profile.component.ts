@@ -57,6 +57,8 @@ export class ProfileComponent implements OnInit {
     email: false
   };
 
+  readMode = true;
+
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService,
@@ -315,5 +317,15 @@ export class ProfileComponent implements OnInit {
     this.registerForm.username.setValue(this.userConnected.username);
     this.registerForm.email.setValue(this.userConnected.email);
     this.registerForm.picture = this.userConnected.picture;
+    this.registerForm.password.setValue('');
+    this.registerForm.passwordRepeat.setValue('');
   }
+
+  setReadMode(value: boolean) {
+    this.readMode = value;
+    if (this.readMode) {
+      this.initUserForm();
+    }
+  }
+
 }

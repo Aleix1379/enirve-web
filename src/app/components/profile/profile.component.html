@@ -15,7 +15,28 @@
       <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="User">
 
-          <div class="profile-tab-content">
+          <div *ngIf="userProfile?.code == token?.userCode && readMode" class="my-profile-read-mode">
+
+            <img [src]="registerForm.picture | serverUrl" alt="user" class="register-user-image">
+            <div class="profile-points">{{userProfile?.progress.points}} EXP</div>
+
+            <div class="profile-read-mode-group">
+              <div class="profile-read-mode-group__row">
+                <div class="profile-read-mode-group__label">Name</div>
+                <div class="profile-read-mode-group__value">{{userProfile.username}}</div>
+              </div>
+              <div class="profile-read-mode-group__row">
+                <div class="profile-read-mode-group__label">Email</div>
+                <div class="profile-read-mode-group__value">{{userProfile.email}}</div>
+              </div>
+            </div>
+
+            <button mat-raised-button color="primary" class="btn-full" (click)="setReadMode(false)">
+              EDIT PROFILE
+            </button>
+          </div>
+
+          <div class="profile-tab-content" *ngIf="!readMode">
             <div>
 
               <img [src]="registerForm.picture | serverUrl" alt="user" class="register-user-image">
@@ -70,7 +91,7 @@
 
               <mat-form-field>
                 <label>
-                  <input matInput placeholder="Repeat the password" type="password"
+                  <input matInput placeholder="Repeat the password" type="password" autocomplete="off"
                          (input)="inputPassword('passwordRepeat')"
                          [formControl]="registerForm.passwordRepeat">
                   <mat-error
@@ -85,6 +106,10 @@
                 </label>
               </mat-form-field>
 
+              <button id="btn-cancel" mat-raised-button class="btn-full" (click)="setReadMode(true)">
+                CANCEL
+              </button>
+
               <button mat-raised-button color="primary" class="btn-full" (click)="updateProfile()">
                 UPDATE
               </button>
@@ -93,23 +118,6 @@
           </div>
 
         </mat-tab>
-
-        <!--
-                    <mat-tab label="Achievements">
-
-                      <div class="profile-tab-content">
-                        <h1>No avai</h1>
-                      </div>
-
-                    </mat-tab>
-            -->
-<!--        <mat-tab label="Friends">
-
-          <div class="profile-tab-content">
-            <app-friends [friends]="friends"></app-friends>
-          </div>
-
-        </mat-tab>-->
 
         <mat-tab label="Configuration" class="profile-tab-config">
 
@@ -175,7 +183,6 @@
         FOLLOW
       </button>
     </div>
-
 
   </div>
 

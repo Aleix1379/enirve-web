@@ -51,8 +51,8 @@
   padding: 16px !important;
 
   @include respond(phone) {
-    padding-left: 0!important;
-    padding-right: 0!important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   padding-top: 22px !important;
@@ -91,23 +91,44 @@
 
 }
 
-.my-profile {
-  //position: relative;
-  //background: #f5f5f569;
+.my-profile-read-mode {
+  display: flex;
+  flex-direction: column;
 
-  /*
-  @include respond(desktop) {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+  .profile-points {
+    margin-top: 16px;
   }
 
-  @include respond(big-desktop) {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+  .profile-read-mode-group {
+    display: flex;
+    flex-direction: column;
+    margin: 32px;
+    font-size: 2.5rem;
+    min-width: 100%;
+    align-self: center;
+    //
+    //@include respond(phone) {
+    //  max-width: unset;
+    //  min-width: unset;
+    //  align-self: unset;
+    //}
+
+    &__row {
+      display: flex;
+      margin-bottom: 16px;
+    }
+
+    &__label {
+      margin-right: auto;
+      font-weight: bold;
+      color: $color-primary-dark;
+    }
+
+    &__value {
+
+    }
+
   }
-  */
 
 }
 
@@ -218,5 +239,14 @@
 }
 
 .btn-logout {
-  margin-top: 32px!important;
+  margin-top: 32px !important;
+}
+
+.profile-tab-read-mode-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#btn-cancel {
+  margin-bottom: 32px !important;
 }
