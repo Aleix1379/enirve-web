@@ -73,13 +73,13 @@ export class ProfileComponent implements OnInit {
     console.log(`ng on init`);
     this.username = this.router.url.split('/')[2];
     this.finishDownload = false;
-    this.token = this.localStorageService.getItem<Token>('auth-token');
+    this.token = this.localStorageService.getAuthToken();
     if (!this.token) {
       this.showLoginRequired = true;
       this.finishDownload = true;
     } else {
       this.showLoginRequired = false;
-      this.config = this.localStorageService.getItem<Config>('config');
+      this.config = this.localStorageService.getConfig();
       this.translationEnabled = !!this.config.translateLanguage;
 
       const userConnectedPromise = this.userService.findByCode(this.token.userCode).toPromise();
@@ -127,7 +127,7 @@ export class ProfileComponent implements OnInit {
 
   private updateConfiguration() {
     if (this.token) {
-      this.localStorageService.setItem<Config>('config', this.config);
+      this.localStorageService.setConfig(this.config);
       this.configService.updateConfig(this.token.userCode, this.config).subscribe(
         () => {
           this.snackBarService.show('Configuration updated successfully');
@@ -258,7 +258,7 @@ export class ProfileComponent implements OnInit {
           }
 
           this.userConnected = userUpdated;
-          this.localStorageService.setItem<User>('user-connected', userUpdated);
+          this.localStorageService.setUserConnected(userUpdated);
           this.eventsService.publish('user-updated', userUpdated);
 
           if (changeUrl) {

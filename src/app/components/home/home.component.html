@@ -19,8 +19,10 @@
 
         <div class="verbs-list">
           <div *ngFor="let verb of section.verbs" class="verbs-list__item">
-            <i class="far fa-check-circle verb-completed" *ngIf="user && getVerbIsCompleted(section.id, verb.id)"></i>
-            {{verb.present}}
+            <i class="far fa-check-circle verb-completed verb-completed--ok"
+               *ngIf="user && getVerbIsCompleted(section.id, verb.id)"></i>
+            <span
+              [ngClass]="{'verb-completed--ok':user && getVerbIsCompleted(section.id, verb.id)}">{{verb.present}}</span>
           </div>
         </div>
 
@@ -36,6 +38,5 @@
   <div id="home-exercices">
     <app-exercises></app-exercises>
   </div>
-
 
 </div>

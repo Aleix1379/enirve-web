@@ -577,7 +577,7 @@ export class HomeComponent implements OnInit {
   }
 
   private downloadUser() {
-    const token = this.localStorageService.getItem<Token>('auth-token');
+    const token = this.localStorageService.getAuthToken();
     if (token) {
       this.showLoading = true;
       this.userService.find('code', token.userCode).subscribe(

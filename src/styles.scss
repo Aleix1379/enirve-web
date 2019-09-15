@@ -61,6 +61,23 @@ body {
 
 }
 
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+app-home,
+app-exercises,
+app-friends,
+app-user-search,
+app-profile,
+app-resume {
+  flex: 1;
+  overflow-y: scroll;
+}
+
 a:active {
   color: inherit;
 }

@@ -19,7 +19,7 @@ import {EventsService} from '../../services/events/events.service';
 export class ResumeComponent implements OnInit {
   private section: Section;
   mistakes: string[] = [];
-  progress: ProgressCounter = null;
+  progress: ProgressCounter;
   points = 0;
   private token: Token;
 
@@ -36,10 +36,10 @@ export class ResumeComponent implements OnInit {
     this.progress = this.paramsService.get('progress');
     this.mistakes = this.paramsService.get('mistakes');
     this.section = this.paramsService.get('section');
-    this.token = this.localStorageService.getItem<Token>('auth-token');
+    this.token = this.localStorageService.getAuthToken();
 
     if (!this.progress) {
-      this.router
+      return this.router
         .navigateByUrl('/')
         .catch(console.error);
     }

@@ -1,0 +1,20 @@
+@import "../../../variables";
+
+.header-container {
+  display: flex;
+  align-items: center;
+
+  app-close {
+    margin-right: 16px;
+  }
+
+  &__title {
+    //margin-left: 32px;
+    color: $color-primary;
+  }
+
+  app-search-bar {
+    margin-left: 16px;
+  }
+
+}

@@ -1,16 +1,16 @@
 <div class="search-container">
 
-  <app-close></app-close>
+  <app-header-container [title]="'Search friends'" [showClose]="true" [onSearch]="searchUsers"></app-header-container>
 
-  <div class="search-input-container">
+<!--  <div class="search-input-container">
     <form class="example-form">
       <mat-form-field class="user-search-input">
         <input matInput placeholder="Usear search" title="user search" [formControl]="search" (input)="searchUsers()">
       </mat-form-field>
     </form>
-  </div>
+  </div>-->
 
-  <app-friends [friends]="users"></app-friends>
+  <app-list-friends [friends]="users" [userConnected]="userConnected" *ngIf="users.length > 0"></app-list-friends>
 
   <img *ngIf="users.length == 0" src="../../../assets/images/following.svg" class="search-users-friends__picture"
        alt="friends">

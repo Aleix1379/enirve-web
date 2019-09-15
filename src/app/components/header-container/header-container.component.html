@@ -1,0 +1,5 @@
+<div class="header-container">
+  <app-close *ngIf="showClose" [onClose]="onClose"></app-close>
+  <h1 class="header-container__title" *ngIf="title.length > 0">{{title}}</h1>
+  <app-search-bar [onSearch]="onSearch" *ngIf="onSearch" ></app-search-bar>
+</div>

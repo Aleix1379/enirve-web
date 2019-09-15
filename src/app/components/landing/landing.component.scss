@@ -176,16 +176,13 @@ app-landing {
       float: left;
       width: 50%;
       padding-top: 20px;
-      padding-bottom: 20px;
+      padding-bottom: 30px;
 
       .landing-device-container {
         margin: 0 auto;
         background: white;
         position: relative;
         min-height: 400px;
-        -webkit-box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.35);
-        -moz-box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.35);
-        box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.35);
         border-radius: 6px;
 
         padding: 30px;

@@ -12,8 +12,10 @@ import {UserService} from '../../services/user/user.service';
 })
 export class FriendsComponent implements OnInit {
   @Input() friends: User[];
+  userConnected: User;
   token: Token;
   showLoading = false;
+  showLoginRequired = false;
 
   constructor(private router: Router,
               private userService: UserService,
@@ -23,13 +25,18 @@ export class FriendsComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.showLoginRequired = false;
     try {
+      this.token = this.localStorageService.getAuthToken();
+      if (!this.token) {
+        this.showLoginRequired = true;
+        return null;
+      }
       this.showLoading = true;
-      this.token = this.localStorageService.getItem<Token>('auth-token');
-      const userConnected = await this.userService.findByCode(this.token.userCode).toPromise();
+      this.userConnected = await this.userService.findByCode(this.token.userCode).toPromise();
       if (!this.friends) {
         this.friends = await this.userService.getFriends(this.token.userCode).toPromise();
-        this.friends.push(userConnected);
+        this.friends.push(this.userConnected);
         this.showLoading = false;
       }
     } catch (error) {
@@ -39,8 +46,8 @@ export class FriendsComponent implements OnInit {
     }
   }
 
-  visitProfile(username: string) {
-    this.router.navigateByUrl(`/profile/${username}`).catch(console.error);
+  closeLoginRequired() {
+    this.showLoginRequired = false;
   }
 
 }

@@ -3,6 +3,9 @@
 
 .resume {
   padding: 16px;
+  height: calc(100% - 32px);
+  margin-top: 16px!important;
+  overflow-y:scroll;
 
   @include respond(tab-land) {
     padding: 30px 100px;

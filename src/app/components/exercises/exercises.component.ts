@@ -13,6 +13,7 @@ import {EventsService} from '../../services/events/events.service';
 import {DeviceService} from '../../services/device/device.service';
 import {Config} from '../../interfaces/Config';
 import {LocalStorageService} from '../../services/localStorage/local-storage.service';
+import {VerbChecked} from '../../interfaces/VerbChecked';
 
 @Component({
   selector: 'app-exercises',
@@ -22,7 +23,7 @@ import {LocalStorageService} from '../../services/localStorage/local-storage.ser
 export class ExercisesComponent implements OnInit {
   private section: Section;
   private currentVerb: Verb;
-  private currentUserIndex = 0;
+  private currentVerbIndex = 0;
   private formChecked = false;
   private mistakes: string[] = [];
   withoutData = true;
@@ -39,6 +40,8 @@ export class ExercisesComponent implements OnInit {
   translation = new FormControl({value: '', disabled: false});
   pastSimple = new FormControl({value: '', disabled: false});
   pastParticiple = new FormControl({value: '', disabled: false});
+
+  resumeVerbsChecked: VerbChecked[] = [];
 
   private static verbCheckTranslation(verb: Verb, translation: string, language: string): boolean {
     if (!translation) {
@@ -83,7 +86,7 @@ export class ExercisesComponent implements OnInit {
 
     }));
 
-    this.config = this.localStorageService.getItem<Config>('config');
+    this.config = this.localStorageService.getConfig();
 
   }
 
@@ -111,8 +114,8 @@ export class ExercisesComponent implements OnInit {
     this.progress = {success: 0, errors: 0};
     this.formChecked = false;
     this.resetForm();
-    this.currentUserIndex = 0;
-    this.currentVerb = this.section.verbs[this.currentUserIndex];
+    this.currentVerbIndex = 0;
+    this.currentVerb = this.section.verbs[this.currentVerbIndex];
   }
 
   loadData(): void {
@@ -120,7 +123,7 @@ export class ExercisesComponent implements OnInit {
       this.withoutData = true;
     } else {
       this.withoutData = false;
-      this.currentVerb = this.section.verbs[this.currentUserIndex];
+      this.currentVerb = this.section.verbs[this.currentVerbIndex];
       this.mistakes = this.paramsService.get('mistakes');
 
       if (!this.mistakes) {
@@ -163,9 +166,17 @@ export class ExercisesComponent implements OnInit {
 
     if (resultTranslation && resultPastSimple && resultPastParticiple) {
       this.progress.success++;
+      this.resumeVerbsChecked.push({
+        verb: this.currentVerb.present,
+        success: true
+      });
     } else {
       this.progress.errors++;
       this.mistakes.push(this.currentVerb.present);
+      this.resumeVerbsChecked.push({
+        verb: this.currentVerb.present,
+        success: false
+      });
     }
 
     this.formChecked = true;
@@ -174,9 +185,9 @@ export class ExercisesComponent implements OnInit {
 
   next() {
     this.formChecked = false;
-    if (this.currentUserIndex < this.section.verbs.length - 1) {
-      this.currentUserIndex++;
-      this.currentVerb = this.section.verbs[this.currentUserIndex];
+    if (this.currentVerbIndex < this.section.verbs.length - 1) {
+      this.currentVerbIndex++;
+      this.currentVerb = this.section.verbs[this.currentVerbIndex];
       this.resetForm();
     }
   }
@@ -207,32 +218,35 @@ export class ExercisesComponent implements OnInit {
     return verb[tense].toLowerCase() === value.toLowerCase();
   }
 
-  cancelExerciceDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        title: 'Quit exercise',
-        subtitle: 'Are you sure?',
-        message: 'You will lose all the progress.'
-      }
-    });
+  cancelExerciceDialog = (): void => {
+    if (this.progress.success === 0 && this.progress.errors === 0) {
+      this.router
+        .navigateByUrl(`/`)
+        .catch(console.error);
+    } else {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+          title: 'Quit exercise',
+          subtitle: 'Are you sure?',
+          message: 'You will lose all the progress.'
+        }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result &&
-        (
-          this.deviceService.isPhone() ||
-          this.deviceService.isTabPort() ||
-          this.deviceService.isDesktop() ||
-          this.deviceService.isBigDesktop()
-        )
-      ) {
-        this.router
-          .navigateByUrl(`/`)
-          .catch(console.error);
-      } else {
-        this.section = null;
-        this.withoutData = true;
-      }
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result &&
+          (
+            this.deviceService.isPhone() ||
+            this.deviceService.isTabPort() ||
+            this.deviceService.isDesktop() ||
+            this.deviceService.isBigDesktop()
+          )
+        ) {
+          this.router
+            .navigateByUrl(`/`)
+            .catch(console.error);
+        }
+      });
+    }
   }
 
   isTranslationEnabled(): boolean {

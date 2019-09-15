@@ -4,7 +4,7 @@
 
 <router-outlet></router-outlet>
 
-<app-footer *ngIf="isDesktop"></app-footer>
+<!--<app-footer *ngIf="isDesktop"></app-footer>-->
 
 <nav class="bottom-nav" *ngIf="!isDesktop && showTabs">
   <a class="bottom-nav__action" [ngClass]="{'bottom-nav__action--active': tabIndex == 1}"

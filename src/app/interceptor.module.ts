@@ -17,7 +17,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.localStorageService.getItem<Token>('auth-token');
+    const authToken = this.localStorageService.getAuthToken();
 
     if (!authToken) {
       return next.handle(req);
@@ -33,7 +33,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
             .navigateByUrl('/login')
             .catch(console.error)
       );
-      this.localStorageService.removeItem('auth-token');
+      this.localStorageService.removeAuthToken();
       return next.handle(req);
     } else {
       const dupReq = req.clone({headers: req.headers.set('authorization', `Bearer ${authToken.token}`)});

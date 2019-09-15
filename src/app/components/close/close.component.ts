@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+
+export type CloseCallback = () => void;
 
 @Component({
   selector: 'app-close',
@@ -7,6 +9,7 @@ import {Location} from '@angular/common';
   styleUrls: ['./close.component.scss']
 })
 export class CloseComponent implements OnInit {
+  @Input() onClose: CloseCallback;
 
   constructor(private location: Location) {
   }
@@ -15,7 +18,11 @@ export class CloseComponent implements OnInit {
   }
 
   close() {
-    this.location.back();
+    if (this.onClose) {
+      this.onClose();
+    } else {
+      this.location.back();
+    }
   }
 
 }

@@ -43,7 +43,7 @@ export class AppComponent {
     this.eventsService.subscribe('user-updated', (userUpdated: User) => this.user = userUpdated);
 
     this.isDesktop = this.deviceService.isDesktop() || this.deviceService.isBigDesktop();
-    this.token = this.localStorageService.getItem<Token>('auth-token');
+    this.token = this.localStorageService.getAuthToken();
 
     this.downloadUserConfig();
     this.downloadUser();
@@ -83,7 +83,7 @@ export class AppComponent {
     if (this.token) {
       this.userService.findByCode(this.token.userCode).subscribe(data => {
         this.user = data;
-        this.localStorageService.setItem<User>('user-connected', this.user);
+        this.localStorageService.setUserConnected(this.user);
       }, error => console.error(error));
     }
   }
@@ -91,7 +91,7 @@ export class AppComponent {
   private downloadUserConfig() {
     if (this.token) {
       this.configService.getConfig(this.token.userCode).subscribe(
-        data => this.localStorageService.setItem<Config>('config', data),
+        data => this.localStorageService.setConfig(data),
         error => {
           console.error('error donwloading user configuration');
           console.error(error);

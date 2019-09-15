@@ -8,7 +8,7 @@
 <div id="profile-container">
 
   <!-- your profile -->
-  <mat-card *ngIf="userProfile?.code == token?.userCode" class="my-profile">
+  <div *ngIf="userProfile?.code == token?.userCode" class="my-profile">
 
     <div *ngIf="!showLoginRequired">
 
@@ -145,11 +145,11 @@
 
     </div>
 
-  </mat-card>
+  </div>
 
   <div *ngIf="userProfile && userProfile.code != token.userCode" class="profile-read-only">
 
-    <app-close></app-close>
+    <app-header-container [showClose]="true"></app-header-container>
 
     <div class="profile-read-only__picture">
       <img [src]="userProfile?.picture | serverUrl" alt="user image">

@@ -37,6 +37,9 @@ import {SlideshowModule} from 'ng-simple-slideshow';
 import { UserSearchComponent } from './user-search/user-search.component';
 import {FriendsComponent} from './friends/friends.component';
 import { CloseComponent } from './close/close.component';
+import { HeaderContainerComponent } from './header-container/header-container.component';
+import { ListFriendsComponent } from './list-friends/list-friends.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   entryComponents: [
@@ -65,6 +68,9 @@ import { CloseComponent } from './close/close.component';
     UserSearchComponent,
     FriendsComponent,
     CloseComponent,
+    HeaderContainerComponent,
+    ListFriendsComponent,
+    SearchBarComponent,
   ],
   imports: [
     CommonModule,

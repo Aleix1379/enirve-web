@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
       this.userService.createToken(this.loginForm.email.value, this.loginForm.password.value).subscribe(
         (data: Token) => {
           this.showLoading = false;
-          this.localStorageService.setItem<Token>('auth-token', data);
+          this.localStorageService.setAuthToken(data);
           this.eventsService.publish('user-logined', data);
           this.router
             .navigateByUrl('/')

@@ -2,7 +2,6 @@
 @import "../../../variables";
 
 #friends-container {
-
   @include respond(tab-land) {
     padding: 30px 200px;
     .profile-language-selection {
@@ -18,65 +17,20 @@
   }
 
   @include layoutDesktop;
-}
 
-.profile-friend {
-  $friend-size: 40px;
-  display: flex;
-  height: $friend-size;
-  line-height: $friend-size;
-  position: relative;
-  cursor: pointer;
-  margin-top: 16px;
-
-  &:not(:last-child) {
-    margin-bottom: 16px;
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -9px;
-      left: 0;
-      height: 2px;
-      width: 100%;
-      background: #c9c9c9;
-    }
+  @include respond(desktop) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @include respond(big-desktop) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  &__index {
-    margin-right: 15px;
-    margin-left: 5px;
-    color: $color-primary;
-  }
-
-  &__picture {
-    width: $friend-size;
-
-    > img {
-      height: $friend-size;
-      width: $friend-size;
-      border-radius: 50%;
-    }
-  }
-
-  &__username {
-    flex: 1;
-    text-align: left;
-    margin-left: 15px;
-  }
-
-  &__points {
-    flex: 1;
-    text-align: right;
-    margin-right: 15px;
-  }
-
-}
-
-.is-user-connected {
-  > div {
-    color: $color-secondary-dark;
-  }
+  height: calc(100% - 32px);
+  margin-top: 16px!important;
+  padding-top: 16px;
+  overflow-y:scroll;
 }
 
 .add-friend {
@@ -84,4 +38,13 @@
   right: 20px;
   bottom: 60px;
   z-index: 100;
+
+  @include respond(desktop) {
+    position: absolute;
+    bottom: 20px;
+  }
+  @include respond(big-desktop) {
+    position: absolute;
+    bottom: 20px;
+  }
 }

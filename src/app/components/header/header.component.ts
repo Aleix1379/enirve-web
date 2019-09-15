@@ -16,4 +16,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  onwProfile() {
+    if (!this.currentPath) {
+      return false;
+    }
+    return this.currentPath.split('/').pop() === this.userName;
+  }
+
 }

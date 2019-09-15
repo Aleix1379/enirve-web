@@ -2,6 +2,14 @@
 
 .search-container {
   padding: 16px;
+  background: fuchsia;
+  display: flex;
+  flex-direction: column;
+
+  app-list-friends {
+    flex: 1;
+    overflow-y: scroll;
+  }
 
   @include respond(tab-land) {
     padding: 30px 200px;
@@ -18,16 +26,9 @@
   }
 
   @include layoutDesktop;
-}
 
-.search-input-container {
-  //margin-top: 40px;
-}
-
-.user-search-input {
-  width: calc(100% - 45px);
-  position: relative;
-  left: 45px;
+  height: calc(100% - 32px);
+  margin-top: 16px!important;
 }
 
 .search-users-friends {
@@ -36,6 +37,7 @@
 
   &__picture {
     width: 100%;
+    margin-top: 32px;
   }
 
 }

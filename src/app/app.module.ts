@@ -24,10 +24,10 @@ import {MatListModule, MatSidenavModule} from '@angular/material';
     ComponentsModule,
     HttpClientModule,
     InterceptorModule,
+    MatListModule,
+    MatSidenavModule,
     PipesModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    MatSidenavModule,
-    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

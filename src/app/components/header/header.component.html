@@ -6,9 +6,9 @@
       <li>
         <a routerLink="/friends" [ngClass]="{'menu-active': currentPath == '/friends'}">Friends</a>
       </li>
-      <li>
-        <a routerLink="/ios" [ngClass]="{'menu-active': currentPath == '/ios'}">iOS</a>
-      </li>
+<!--      <li>-->
+<!--        <a routerLink="/ios" [ngClass]="{'menu-active': currentPath == '/ios'}">iOS</a>-->
+<!--      </li>-->
       <li>
         <a routerLink="/about" [ngClass]="{'menu-active': currentPath == '/about'}">About Enirve</a>
       </li>
@@ -19,7 +19,7 @@
         <img [src]="userImage | serverUrl" alt="user picture" class="user-picture" *ngIf="userImage">
       </li>
       <li [routerLink]="'/profile/' + userName">
-        <a [ngClass]="{'menu-active': currentPath?.includes('/profile')}">{{userName}}</a>
+        <a [ngClass]="{'menu-active': onwProfile()}">{{userName}}</a>
       </li>
     </ul>
   </mat-toolbar>
