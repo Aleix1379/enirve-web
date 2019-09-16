@@ -15,8 +15,10 @@ body {
 
 app-landing {
   display: block;
-  background: white;
-  padding-bottom: 500px;
+  background: #fff;
+  /* padding-bottom: 500px; */
+  flex: 1;
+  overflow-y: scroll;
 
   #landing-header {
     background: white;
@@ -292,6 +294,13 @@ app-landing {
     #landing-social-networks-text {
 
       #landing-social-networks-links {
+        display: flex;
+        align-items: center;
+
+        > img {
+          height: 200px;
+          margin-right: 32px;
+        }
 
         > div:nth-child(even) {
           background: #E6E4FE;
@@ -312,7 +321,7 @@ app-landing {
           margin-right: 150px;
         }
 
-        margin-top: 15px;
+        margin-top: 32px;
 
         a {
 
@@ -357,6 +366,7 @@ app-landing {
     .landing-title {
       font-size: 46px;
       color: #223242;
+      text-decoration: underline #223242;
       margin-bottom: 15px;
     }
 
