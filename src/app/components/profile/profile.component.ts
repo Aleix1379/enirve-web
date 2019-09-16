@@ -259,6 +259,7 @@ export class ProfileComponent implements OnInit {
             changeUrl = true;
           }
 
+          this.registerForm.picture = userUpdated.picture;
           this.userConnected = userUpdated;
           this.localStorageService.setUserConnected(userUpdated);
           this.eventsService.publish('user-updated', userUpdated);
