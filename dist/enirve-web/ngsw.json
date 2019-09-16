@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568649172097,
+  "timestamp": 1568649508912,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -63,6 +63,7 @@
         "/assets/images/undraw_wireframing_nxyi.svg",
         "/assets/images/undraw_working_late_pukg.svg",
         "/assets/images/user.png",
+        "/assets/js/github-buttons.js",
         "/fa-brands-400.03783c5172ee1ad128c5.eot",
         "/fa-brands-400.073c2f3ce60eaf69cc27.svg",
         "/fa-brands-400.7559b3774a0625e8ca6c.woff2",
@@ -126,6 +127,7 @@
     "/assets/images/undraw_wireframing_nxyi.svg": "b9ed1d47fb4d1d843df70695b73c78d318244f21",
     "/assets/images/undraw_working_late_pukg.svg": "1adab8ac6f3e79968a472d22cfea9f30efe40ac3",
     "/assets/images/user.png": "dfcbf7c07794eab800e18310190f5b967edecb5d",
+    "/assets/js/github-buttons.js": "bce9270ee99d33ee661e221be82815b0044a2e71",
     "/es2015-polyfills.8324bb31dd8aa5f2460c.js": "1612fe8f7e8e0c856f0885ff179e93363c67834f",
     "/fa-brands-400.03783c5172ee1ad128c5.eot": "cad3317342dbe39e333569633f1c103e1d138722",
     "/fa-brands-400.073c2f3ce60eaf69cc27.svg": "d219cda076ad129bb27cd994286db8ff8169e337",
@@ -142,7 +144,7 @@
     "/fa-solid-900.b557f56e367e59344ca9.svg": "add1af0ce6d10a103c434b4edaa6c07acaaea3bc",
     "/fa-solid-900.b5cf8ae26748570d8fb9.woff2": "07bed153d47f9129a944ee54dd72952deed074c8",
     "/fa-solid-900.ef3df98419d143d9617f.eot": "acee4f1e361ccf995121f381b95424b6ec6b29c0",
-    "/index.html": "6cfb99572515bfb595b1da626317d4dc133d8b3b",
+    "/index.html": "545473e8cef79bf82296f285180c53e2660588cb",
     "/main.0bf9378f6aeec9587336.js": "bb68ed0c467453b52e3c4eb3822041a42be6fe79",
     "/polyfills.8bbb231b43165d65d357.js": "ffa449995bf2eba2ccd0a002417214f7eb75e7b5",
     "/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
