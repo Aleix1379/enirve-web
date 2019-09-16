@@ -1,4 +1,5 @@
 @import "../../../variables";
+@import "../../../mixins";
 
 #app-landing-container {
   overflow-y: scroll;
@@ -99,75 +100,74 @@ app-landing {
 
   }
 
-  #landing-goals {
+  .landing-goals {
     margin-top: 80px;
 
-    #landing-goals-description,
-    #landing-goals-image {
+    .landing-goals-description,
+    .landing-goals-image {
       float: left;
       width: 50%;
     }
+  }
 
-    #landing-goals-description {
-      overflow: auto;
+  .landing-goals-description {
+    overflow: auto;
 
-      > div {
-        float: right;
-        font-family: 'SF Pro Display', serif;
-      }
-
-      #landing-goals-description-title {
-        font-weight: lighter;
-        font-size: 65px;
-        margin-bottom: 10px;
-      }
-
-      #landing-goals-description-subtitle {
-        font-size: 17px;
-        font-weight: lighter;
-      }
-
-      #landing-goals-description-btn-get-started {
-        clear: both;
-        float: left;
-        margin-top: 30px;
-
-        a {
-          text-decoration: none;
-          color: white;
-          font-family: 'SF Pro Display', serif;
-          font-size: 17px;
-          background: $yellow;
-          border: none;
-          width: 190px;
-          height: 60px;
-          display: block;
-          border-radius: 30px;
-          cursor: pointer;
-          text-align: center;
-          line-height: 60px;
-        }
-
-        > button:focus {
-          outline: none !important;
-        }
-
-      }
-
+    > div {
+      float: right;
+      font-family: 'SF Pro Display', serif;
     }
 
-    #landing-goals-image {
-      div {
-        min-height: 500px;
-        width: 100%;
-        background: url("../../../assets/images/undraw_working_late_pukg.svg") no-repeat center;
-        background-size: contain;
+    .landing-goals-description-title {
+      font-weight: lighter;
+      font-size: 65px;
+      margin-bottom: 10px;
+    }
+
+    .landing-goals-description-subtitle {
+      font-size: 17px;
+      font-weight: lighter;
+    }
+
+    .landing-goals-description-btn-get-started {
+      clear: both;
+      float: left;
+      margin-top: 30px;
+
+      a {
+        text-decoration: none;
+        color: white;
+        font-family: 'SF Pro Display', serif;
+        font-size: 17px;
+        background: $yellow;
+        border: none;
+        width: 190px;
+        height: 60px;
+        display: block;
+        border-radius: 30px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 60px;
       }
+
+      > button:focus {
+        outline: none !important;
+      }
+
     }
 
   }
 
-  #landing-devices {
+  .landing-goals-image {
+    div {
+      min-height: 500px;
+      width: 100%;
+      background: url("../../../assets/images/undraw_working_late_pukg.svg") no-repeat center;
+      background-size: contain;
+    }
+  }
+
+  .landing-devices {
 
     .landing-device-layout:first-child .landing-device-container {
       float: right;
@@ -194,38 +194,38 @@ app-landing {
 
         padding: 30px;
 
-        #device-background-container {
+        .device-background-container {
           img {
             height: 300px;
           }
         }
 
-        .landing-devies-sources {
-          overflow: auto;
-          margin-top: 30px;
-
-          > div {
-            width: 50%;
-            float: left;
-
-            a {
-              color: mat-color($mat-orange, 400);
-              font-family: 'SF Pro Display', serif;
-              text-decoration: none;
-              font-size: 17px;
-            }
-          }
-
-          > div:nth-child(2) {
-            a {
-              float: right;
-            }
-          }
-
-        }
-
       }
 
+    }
+
+  }
+
+  .landing-devies-sources {
+    overflow: auto;
+    margin-top: 30px;
+
+    > div {
+      width: 50%;
+      float: left;
+
+      a {
+        color: mat-color($mat-orange, 400);
+        font-family: 'SF Pro Display', serif;
+        text-decoration: none;
+        font-size: 17px;
+      }
+    }
+
+    > div:nth-child(2) {
+      a {
+        float: right;
+      }
     }
 
   }
@@ -359,7 +359,7 @@ app-landing {
   }
 
   .landing-block {
-    margin-top: 200px;
+    margin-top: 50px;
     overflow: auto;
     min-height: 100px;
 
@@ -386,6 +386,110 @@ app-landing {
     position: fixed;
     right: 32px;
     bottom: 32px;
+  }
+
+}
+
+.app-landing-container--desktop {
+  display: block;
+  @include respond(phone) {
+    display: none;
+  }
+}
+
+.app-landing-container--mobile {
+  display: none;
+  @include respond(phone) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .landing-goals-description-title {
+    font-size: 35px !important;
+    text-align: center;
+    margin-top: 16px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .landing-goals-description-btn-get-started {
+    > a {
+      width: calc(100vw - 30px) !important;
+    }
+  }
+
+  .landing-goals-image--mobile {
+    > img {
+      width: 100%;
+      margin-top: 32px;
+    }
+  }
+
+  .landing-device-container--mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  .landing-device-layout--mobile {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .device-background-container--mobile {
+    > img {
+      width: 100%;
+    }
+
+  }
+
+  #landing-friends--mobile {
+
+  }
+
+  #landing-friends-text--mobile {
+
+  }
+
+  #landing-friends-image--mobile {
+    > img {
+      width: 100%;
+      margin-top: 16px;
+    }
+  }
+
+  .landing-title {
+    font-size: 36px!important;
+  }
+
+  #landing-social-networks-title--mobile {
+    font-size: 46px;
+    color: #223242;
+    text-decoration: underline #223242;
+    margin-bottom: 15px;
+    margin-top: 16px;
+  }
+
+  #landing-social-networks-links--mobile {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > img {
+      width: 100%;
+    }
+
+     > span {
+      margin-top: 16px;
+       margin-bottom: 16px;
+    }
+
   }
 
 }
