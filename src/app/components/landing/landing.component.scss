@@ -1,5 +1,10 @@
 @import "../../../variables";
 
+#app-landing-container {
+  overflow-y: scroll;
+  height: 100%;
+}
+
 mat-toolbar {
   //display: none !important;
 }
@@ -375,6 +380,12 @@ app-landing {
       color: #657783;
     }
 
+  }
+
+  #landing-btn-go-top {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
   }
 
 }

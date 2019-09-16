@@ -15,6 +15,10 @@ export class LandingComponent implements OnInit {
   devices: Device[];
   socialNetworks: SocialNetwork[];
 
+  isShow: boolean;
+  topPosToStartShowing = 100;
+  mainDiv: HTMLElement;
+
   private static getDevices(): Device[] {
     return [
       {
@@ -62,15 +66,29 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     this.devices = LandingComponent.getDevices();
     this.socialNetworks = LandingComponent.getSocialNetworks();
+    this.mainDiv = document.getElementById('app-landing-container');
   }
 
-/*  goToLogin() {
-    this.router.navigate(['/login'], {queryParams: {mode: 'signin'}}).then(console.log).catch(console.error);
+  checkScroll() {
+    this.isShow = this.mainDiv.scrollTop >= this.topPosToStartShowing;
   }
 
-  goToSignup() {
-    this.router.navigate(['/login'], {queryParams: {mode: 'signup'}}).then(console.log).catch(console.error);
-  }*/
+  gotoTop() {
+    console.log(`go to top....`);
+    this.mainDiv.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  /*  goToLogin() {
+      this.router.navigate(['/login'], {queryParams: {mode: 'signin'}}).then(console.log).catch(console.error);
+    }
+
+    goToSignup() {
+      this.router.navigate(['/login'], {queryParams: {mode: 'signup'}}).then(console.log).catch(console.error);
+    }*/
 
 
 }

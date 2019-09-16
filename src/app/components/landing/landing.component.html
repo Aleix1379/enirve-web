@@ -1,4 +1,4 @@
-<div>
+<div id="app-landing-container" (scroll)="checkScroll()">
 
   <div id="landing-goals" class="landing-block">
 
@@ -7,8 +7,8 @@
       <div>
         <p id="landing-goals-description-title">With Enirve you can <br/>practise irregular verbs</p>
 
-<!--        <p id="landing-goals-description-subtitle">You can practice by selecting one by one, with a number of verbs or-->
-<!--          with a time limit</p>-->
+        <!--        <p id="landing-goals-description-subtitle">You can practice by selecting one by one, with a number of verbs or-->
+        <!--          with a time limit</p>-->
 
         <div id="landing-goals-description-btn-get-started">
           <a [routerLink]="'/'">get started</a>
@@ -94,18 +94,19 @@
 
         <img [src]="'../../assets/images/Octocat.jpg'" alt="Octocat image">
 
-        <a class="github-button" href="https://github.com/Aleix1379" data-size="large" aria-label="Follow @Aleix1379 on GitHub">Follow @Aleix1379</a>
+        <a class="github-button" href="https://github.com/Aleix1379" data-size="large"
+           aria-label="Follow @Aleix1379 on GitHub">Follow @Aleix1379</a>
 
-<!--        <div *ngFor="let socialNetwork of socialNetworks">
-          <a [href]="socialNetwork.link.url" target="_blank">
-            <div class="landing-social-network-image">
-              <img [src]="socialNetwork.image" alt="image social network"/>
-            </div>
-            <div class="landing-social-network-link">
-              {{socialNetwork.socialNetworkName}}: {{socialNetwork.link.text}}
-            </div>
-          </a>
-        </div>-->
+        <!--        <div *ngFor="let socialNetwork of socialNetworks">
+                  <a [href]="socialNetwork.link.url" target="_blank">
+                    <div class="landing-social-network-image">
+                      <img [src]="socialNetwork.image" alt="image social network"/>
+                    </div>
+                    <div class="landing-social-network-link">
+                      {{socialNetwork.socialNetworkName}}: {{socialNetwork.link.text}}
+                    </div>
+                  </a>
+                </div>-->
 
       </div>
 
@@ -113,5 +114,8 @@
 
   </div>
 
+  <button id="landing-btn-go-top" mat-mini-fab color="accent" *ngIf="isShow" (click)="gotoTop()">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
 </div>
