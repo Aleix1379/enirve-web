@@ -22,15 +22,6 @@
     background: #efefef;
   }
 
-  #home-exercices {
-    display: none;
-
-    @include respond(tab-land) {
-      display: block;
-      flex: 1;
-      border-left: 1px solid $color-grey-dark-3;
-    }
-  }
 }
 
 .sections-list {
